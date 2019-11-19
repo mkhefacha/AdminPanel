@@ -29,7 +29,7 @@
         <header class="main-header">
             <a href="#" class="logo">
                 <span class="logo-mini"><b>{{ trans('panel.site_title') }}</b></span>
-                <span class="logo-lg">{{ trans('panel.site_title') }}</span>
+                <span class="logo-lg">CRM</span>
             </a>
 
             <nav class="navbar navbar-static-top">
@@ -90,7 +90,7 @@
             @yield('content')
         </div>
         <footer class="main-footer text-center">
-            <strong>{{ trans('panel.site_title') }} &copy;</strong> {{ trans('global.allRightsReserved') }}
+
         </footer>
 
         <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">

@@ -52,7 +52,7 @@
                     </ul>
                 </li>
             @endcan
-            @can('basic_c_r_m_access')
+           <!-- @can('basic_c_r_m_access')
                 <li class="treeview">
                     <a href="#">
                         <i class="fa-fw fas fa-briefcase">
@@ -104,7 +104,7 @@
                         @endcan
                     </ul>
                 </li>
-            @endcan
+            @endcan-->
             @can('contact_management_access')
                 <li class="treeview">
                     <a href="#">
@@ -139,7 +139,7 @@
                 </li>
             @endcan
             @php($unread = \App\QaTopic::unreadCount())
-                <li class="{{ request()->is('admin/messenger') || request()->is('admin/messenger/*') ? 'active' : '' }}">
+               <!-- <li class="{{ request()->is('admin/messenger') || request()->is('admin/messenger/*') ? 'active' : '' }}">
                     <a href="{{ route("admin.messenger.index") }}">
                         <i class="fa-fw fa fa-envelope">
 
@@ -149,7 +149,7 @@
                             <strong>( {{ $unread }} )</strong>
                         @endif
                     </a>
-                </li>
+                </li>-->
                 <li>
                     <a href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                         <i class="fas fa-fw fa-sign-out-alt">
