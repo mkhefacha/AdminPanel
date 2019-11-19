@@ -123,7 +123,7 @@
 
   $.extend(true, $.fn.dataTable.defaults, {
     order: [[ 1, 'asc' ]],
-    pageLength: 25,
+    pageLength: 10,
   });
   $('.datatable-Permission:not(.ajaxTable)').DataTable({ buttons: dtButtons })
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
