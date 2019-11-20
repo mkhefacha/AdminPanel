@@ -3,6 +3,8 @@
 namespace App;
 
 use Carbon\Carbon;
+use App\ContactCompany;
+use App\Role;
 use Hash;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -32,13 +34,30 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'company_id',
         'password',
+        'active',
         'created_at',
         'updated_at',
         'deleted_at',
         'remember_token',
         'email_verified_at',
     ];
+
+    protected $attributes = [
+        'active' => 0
+    ];
+
+    public function getActiveAttribute($attribute)
+    {
+        return
+            [
+                0 => 'Inactive',
+                1 => 'Active'
+
+            ][$attribute];
+    }
+
 
     public function getEmailVerifiedAtAttribute($value)
     {
@@ -66,4 +85,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
+
+    public function company()
+    {
+        return $this->belongsTo(ContactCompany::class, 'company_id');
+    }
+
+
 }

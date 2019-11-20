@@ -26,6 +26,9 @@ class StoreUserRequest extends FormRequest
                 'required',
                 'unique:users',
             ],
+            'active'     => [
+                'required',
+            ],
             'password' => [
                 'required',
             ],

@@ -18,7 +18,7 @@ class ContactContactsController extends Controller
     {
         abort_if(Gate::denies('contact_contact_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $contactContacts = ContactContact::all();
+        $contactContacts = ContactContact::with('company')->get();
 
         return view('admin.contactContacts.index', compact('contactContacts'));
     }

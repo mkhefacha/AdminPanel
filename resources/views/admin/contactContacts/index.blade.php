@@ -68,7 +68,7 @@
                                             {{ $contactContact->id ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $contactContact->company->company_name ?? '' }}
+                                            {{ $contactContact->company->company_name ?? ''}}
                                         </td>
                                         <td>
                                             {{ $contactContact->contact_first_name ?? '' }}

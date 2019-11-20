@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+    @extends('layouts.admin')
 @section('content')
 <div class="content">
 
@@ -40,10 +40,10 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.user.fields.email_verified_at') }}
+                                       Companies
                                     </th>
                                     <td>
-                                        {{ $user->email_verified_at }}
+                                        {{ $user->company->company_name ?? ''}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -54,6 +54,18 @@
                                         @foreach($user->roles as $id => $roles)
                                             <span class="label label-info label-many">{{ $roles->title }}</span>
                                         @endforeach
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th>
+                                        Status
+                                    </th>
+                                    <td>
+                                        @if($user->active==1)<span class="label label-success">Active</span>
+                                        @else
+                                            <span class="label label-danger">Inactive</span>
+                                        @endif
                                     </td>
                                 </tr>
                             </tbody>

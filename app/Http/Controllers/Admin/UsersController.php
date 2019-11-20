@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use App\ContactCompany ;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyUserRequest;
 use App\Http\Requests\StoreUserRequest;
@@ -11,9 +11,11 @@ use App\User;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-
+use App\Http\Controllers\Traits\ScopeUser;
 class UsersController extends Controller
 {
+    use ScopeUser;
+
     public function index()
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -26,10 +28,10 @@ class UsersController extends Controller
     public function create()
     {
         abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $companies = $this->AllComapnies();
+        $roles = $this->AllRoles();
 
-        $roles = Role::all()->pluck('title', 'id');
-
-        return view('admin.users.create', compact('roles'));
+        return view('admin.users.create', compact('roles','companies'));
     }
 
     public function store(StoreUserRequest $request)
@@ -43,12 +45,12 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         abort_if(Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $roles = Role::all()->pluck('title', 'id');
+        $companies = $this->AllComapnies();
+        $roles = $this->AllRoles();
 
         $user->load('roles');
 
-        return view('admin.users.edit', compact('roles', 'user'));
+        return view('admin.users.edit', compact('roles', 'user','companies'));
     }
 
     public function update(UpdateUserRequest $request, User $user)
@@ -64,6 +66,7 @@ class UsersController extends Controller
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $user->load('roles');
+
 
         return view('admin.users.show', compact('user'));
     }

@@ -14,6 +14,21 @@
                     <form action="{{ route("admin.users.update", [$user->id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
+
+                        <div class="form-group {{ $errors->has('company_id') ? 'has-error' : '' }}">
+                            <label for="company">{{ trans('cruds.contactContact.fields.company') }}*</label>
+                            <select name="company_id" id="company" class="form-control select2" required>
+                                @foreach($companies as $id => $company)
+                                    <option value="{{ $id }}" {{ (isset($user) && $user->company ? $user->company->id : old('company_id')) == $id ? 'selected' : '' }}>{{ $company }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('company_id'))
+                                <p class="help-block">
+                                    {{ $errors->first('company_id') }}
+                                </p>
+                            @endif
+                        </div>
+
                         <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                             <label for="name">{{ trans('cruds.user.fields.name') }}*</label>
                             <input type="text" id="name" name="name" class="form-control" value="{{ old('name', isset($user) ? $user->name : '') }}" required>
@@ -68,6 +83,16 @@
                                 {{ trans('cruds.user.fields.roles_helper') }}
                             </p>
                         </div>
+
+                        <div class="form-group">
+                            <label for="active">Status*</label>
+                            <select name="active" id="active" class="form-control">
+                                <option value="" disabled>Select Status</option>
+                                <option value="1" {{$user->active=='Active' ? 'selected':''}}>Actif</option>
+                                <option value="0"{{$user->active=='Inactive' ? 'selected':''}}>Inactive</option>
+                            </select>
+                        </div> <br>
+
                         <div>
                             <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
                         </div>
