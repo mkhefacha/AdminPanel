@@ -34,7 +34,7 @@ class ContactContactsController extends Controller
 
     public function store(StoreContactContactRequest $request)
     {
-        $contactContact = ContactContact::create($request->all());
+        ContactContact::create($request->all());
 
         return redirect()->route('admin.contact-contacts.index');
     }

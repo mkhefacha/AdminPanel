@@ -18,6 +18,8 @@
 
 <body class="hold-transition login-page">
     @yield('content')
+    <script src="https://www.google.com/recaptcha/api.js">
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
     @yield('scripts')
