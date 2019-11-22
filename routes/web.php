@@ -9,7 +9,9 @@ Route::get('/home', function () {
     return redirect()->route('admin.home');
 });
 
+
 Auth::routes(['register' => false]);
+
 Route::get('/refreshcaptcha','Auth\loginController@refreshcaptcha');
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
 
@@ -63,3 +65,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('messenger/{topic}/reply', 'MessengerController@replyToTopic')->name('messenger.reply');
     Route::get('messenger/{topic}/reply', 'MessengerController@showReply')->name('messenger.showReply');*/
 });
+//test
+//Route::get('/test', 'TestController@index');

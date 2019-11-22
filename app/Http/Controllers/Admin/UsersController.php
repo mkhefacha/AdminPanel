@@ -16,13 +16,16 @@ class UsersController extends Controller
 {
     use ScopeUser;
 
+
     public function index()
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $users = User::with('roles')->get();
+        $company=ContactCompany::onlyTrashed()->get();
+        $roles=Role::all();
 
-        return view('admin.users.index', compact('users'));
+        return view('admin.users.index', compact('users','company','roles'));
     }
 
     public function create()

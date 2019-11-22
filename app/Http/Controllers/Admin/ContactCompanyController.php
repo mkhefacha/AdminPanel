@@ -19,6 +19,7 @@ class ContactCompanyController extends Controller
 
         $contactCompanies = ContactCompany::all();
 
+
         return view('admin.contactCompanies.index', compact('contactCompanies'));
     }
 
