@@ -48,6 +48,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Contact Companies
     Route::delete('contact-companies/destroy', 'ContactCompanyController@massDestroy')->name('contact-companies.massDestroy');
+    route::get('companie-history','ContactCompanyController@history')->name('companie-history');
     Route::resource('contact-companies', 'ContactCompanyController');
 
     // Contact Contacts

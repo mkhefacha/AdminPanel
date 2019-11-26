@@ -54,6 +54,34 @@
                                         {{ $contactCompany->company_email }}
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.contactCompany.fields.nbr_sms') }}
+                                    </th>
+                                    <td>
+                                        {{ $contactCompany->nbr_sms }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.contactCompany.fields.nbr_email') }}
+                                    </th>
+                                    <td>
+                                        {{ $contactCompany->nbr_email }}
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th>
+                                        Status
+                                    </th>
+                                    <td>
+                                        @if($contactCompany->status==1)<span class="label label-success">Active</span>
+                                        @else
+                                            <span class="label label-danger">Inactive</span>
+                                        @endif
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <a style="margin-top:20px;" class="btn btn-default" href="{{ url()->previous() }}">

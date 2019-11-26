@@ -125,6 +125,18 @@
                                 </a>
                             </li>
                         @endcan
+
+                            @can('contact_company_history')
+                                <li class="{{ request()->is('admin/companie-history') || request()->is('admin/companie-history/*') ? 'active' : '' }}">
+                                    <a href="{{ route("admin.companie-history") }}">
+                                       <i class="fas fa-history"></i>
+
+
+                                        <span>{{ trans('cruds.contacthistory.title') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+
                         @can('contact_contact_access')
                             <li class="{{ request()->is('admin/contact-contacts') || request()->is('admin/contact-contacts/*') ? 'active' : '' }}">
                                 <a href="{{ route("admin.contact-contacts.index") }}">

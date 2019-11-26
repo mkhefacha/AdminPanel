@@ -11,7 +11,10 @@ class CreateContactCompaniesTable extends Migration
         Schema::create('contact_companies', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('company_name')->nullable();
+            $table->string('company_name')->unique();
+
+            $table->integer('nbr_sms')->nullable();
+            $table->integer('nbr_email')->nullable();
 
             $table->string('company_address')->nullable();
 

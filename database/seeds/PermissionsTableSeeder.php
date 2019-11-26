@@ -200,6 +200,14 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => '48',
                 'title' => 'contact_contact_access',
             ],
+
+
+            [
+                'id'    => '49',
+                'title' => 'contact_company_history',
+            ],
+
+
         ];
 
         Permission::insert($permissions);

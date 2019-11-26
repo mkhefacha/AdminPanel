@@ -171,6 +171,10 @@ return [
             'company_name_helper'    => '',
             'company_address'        => 'Address',
             'company_address_helper' => '',
+            'nbr_sms'                => 'nbr Sms',
+            'nbr_sms_helper'         => '',
+            'nbr_email'                => 'nbr Email',
+            'nbr_email_helper'         => '',
             'company_website'        => 'Website',
             'company_website_helper' => '',
             'company_email'          => 'Email',
@@ -182,6 +186,12 @@ return [
             'deleted_at'             => 'Deleted At',
             'deleted_at_helper'      => '',
         ],
+
+
+    ],
+
+    'contacthistory' => [
+        'title'          => 'history',
     ],
     'contactContact'    => [
         'title'          => 'Contacts',

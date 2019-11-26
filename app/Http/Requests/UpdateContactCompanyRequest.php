@@ -19,6 +19,16 @@ class UpdateContactCompanyRequest extends FormRequest
     public function rules()
     {
         return [
+
+            'company_name'=> 'required',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'company_name.required' => "nom est obligatoire",
+            'company_name.unique' => "nom c'est deja existe",
+
         ];
     }
 }

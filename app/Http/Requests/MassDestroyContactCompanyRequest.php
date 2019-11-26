@@ -21,6 +21,7 @@ class MassDestroyContactCompanyRequest extends FormRequest
         return [
             'ids'   => 'required|array',
             'ids.*' => 'exists:contact_companies,id',
+
         ];
     }
 }

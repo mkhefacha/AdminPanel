@@ -73,4 +73,14 @@ class ContactCompanyController extends Controller
 
         return response(null, Response::HTTP_NO_CONTENT);
     }
+
+           public function history ()
+
+           {
+                 return view ('admin.contactCompanies.history');
+           }
+
+
+
+
 }
