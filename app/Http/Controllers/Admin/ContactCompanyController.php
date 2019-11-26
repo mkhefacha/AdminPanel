@@ -32,7 +32,7 @@ class ContactCompanyController extends Controller
 
     public function store(StoreContactCompanyRequest $request)
     {
-        $contactCompany = ContactCompany::create($request->all());
+        ContactCompany::create($request->all());
 
         return redirect()->route('admin.contact-companies.index');
     }

@@ -12,9 +12,9 @@
             </p>
 
             @if(session('message'))
-                <p class="alert alert-info">
+                <div class="alert alert-info">
                     {{ session('message') }}
-                </p>
+                </div>
             @endif
 
             <form method="POST" action="{{ route('login') }}">

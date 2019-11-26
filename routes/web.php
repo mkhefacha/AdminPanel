@@ -66,4 +66,4 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('messenger/{topic}/reply', 'MessengerController@showReply')->name('messenger.showReply');*/
 });
 //test
-//Route::get('/test', 'TestController@index');
+Route::get('/test', 'TestController@index');
