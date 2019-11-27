@@ -27,8 +27,11 @@ class UpdateContactCompanyRequest extends FormRequest
     {
         return [
             'company_name.required' => "nom est obligatoire",
-            'company_name.unique' => "nom c'est deja existe",
+
 
         ];
     }
+
+
+
 }

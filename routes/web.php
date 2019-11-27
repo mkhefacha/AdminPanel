@@ -49,6 +49,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Contact Companies
     Route::delete('contact-companies/destroy', 'ContactCompanyController@massDestroy')->name('contact-companies.massDestroy');
     route::get('companie-history','ContactCompanyController@history')->name('companie-history');
+    route::delete('contact-companies/forcedestroy/{id}','ContactCompanyController@forcedestroy')->name('contact-companies.ForceDestroy');
+    route::get('contact-companies/restore/{id}','ContactCompanyController@restore')->name('contact-companies.restore');
     Route::resource('contact-companies', 'ContactCompanyController');
 
     // Contact Contacts
@@ -67,4 +69,4 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('messenger/{topic}/reply', 'MessengerController@showReply')->name('messenger.showReply');*/
 });
 //test
-Route::get('/test', 'TestController@index');
+Route::get('/test/{contactCompany}', 'TestController@index');

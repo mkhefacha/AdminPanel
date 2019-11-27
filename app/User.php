@@ -91,6 +91,19 @@ class User extends Authenticatable
         return $this->belongsTo(ContactCompany::class, 'company_id');
     }
 
+    public function  scopeActiveUser($query,$field)
+    {
+        return $query->where('company_id',$field);
 
+
+    }
+
+
+    public static  function  scopeInActiveUser($query, $field)
+    {
+        return $query->where('company_id',$field);
+
+
+    }
 
 }

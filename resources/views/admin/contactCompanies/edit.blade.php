@@ -11,10 +11,10 @@
                     </div>
                     <div class="panel-body">
 
-                        <form action="{{ route("admin.contact-companies.update", [$contactCompany->id]) }}"
-                              method="POST" enctype="multipart/form-data">
+                        <form action="{{ route("admin.contact-companies.update", $contactCompany->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
+
                             <div class="form-group {{ $errors->has('company_name') ? 'has-error' : '' }}">
                                 <label for="company_name">{{ trans('cruds.contactCompany.fields.company_name') }} *</label>
                                 <input type="text" id="company_name" name="company_name" class="form-control"
@@ -100,6 +100,7 @@
                                     <option value="0"{{$contactCompany->status=='Inactive' ? 'selected':''}}>Inactive</option>
                                 </select>
                             </div> <br>
+
 
                             <div>
                                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">

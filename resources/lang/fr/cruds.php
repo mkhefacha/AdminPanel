@@ -191,7 +191,7 @@ return [
     ],
 
     'contacthistory' => [
-        'title'          => 'history',
+        'title'          => 'historique',
     ],
     'contactContact'    => [
         'title'          => 'Contacts',

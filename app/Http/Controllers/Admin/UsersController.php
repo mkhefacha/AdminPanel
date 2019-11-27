@@ -22,19 +22,19 @@ class UsersController extends Controller
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $users = User::with('roles')->get();
-        $company=ContactCompany::onlyTrashed()->get();
-        $roles=Role::all();
+        $company=ContactCompany::get();
 
-        return view('admin.users.index', compact('users','company','roles'));
+        return view('admin.users.index', compact('users','company'));
     }
 
-    public function create()
+    public function create(User $user)
     {
         abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $companies = $this->AllComapnies();
+        $companies = ContactCompany::all();
         $roles = $this->AllRoles();
+        $user->load('roles');
 
-        return view('admin.users.create', compact('roles','companies'));
+        return view('admin.users.create', compact('roles','companies','user'));
     }
 
     public function store(StoreUserRequest $request)
@@ -48,7 +48,7 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         abort_if(Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $companies = $this->AllComapnies();
+        $companies = ContactCompany::all();
         $roles = $this->AllRoles();
 
         $user->load('roles');
