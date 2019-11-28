@@ -32,7 +32,7 @@ class UsersController extends Controller
         abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $companies = ContactCompany::all();
         $roles = $this->AllRoles();
-        $user->load('roles');
+
 
         return view('admin.users.create', compact('roles','companies','user'));
     }

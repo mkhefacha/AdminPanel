@@ -191,8 +191,12 @@ return [
     ],
 
     'contacthistory' => [
-        'title'          => 'historique',
+        'title'          => 'Historique',
     ],
+    'companieliste' => [
+        'title'          => 'Liste',
+    ],
+
     'contactContact'    => [
         'title'          => 'Contacts',
         'title_singular' => 'Contact',

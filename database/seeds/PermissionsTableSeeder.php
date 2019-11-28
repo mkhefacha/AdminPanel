@@ -207,6 +207,30 @@ class PermissionsTableSeeder extends Seeder
                 'title' => 'contact_company_history',
             ],
 
+            [
+                'id'    => '50',
+                'title' =>  'liste_company_access',
+            ],
+
+            [
+                'id'    => '51',
+                'title' =>  'liste_company_create',
+            ],
+
+            [
+                'id'    => '52',
+                'title' =>  'liste_company_show',
+            ],
+
+            [
+                'id'    => '53',
+                'title' =>  'liste_company_edit',
+            ],
+
+            [
+                'id'    => '54',
+                'title' =>  'liste_company_delete',
+            ],
 
         ];
 

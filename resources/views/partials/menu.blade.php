@@ -52,59 +52,7 @@
                     </ul>
                 </li>
             @endcan
-           <!-- @can('basic_c_r_m_access')
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa-fw fas fa-briefcase">
 
-                        </i>
-                        <span>{{ trans('cruds.basicCRM.title') }}</span>
-                        <span class="pull-right-container"><i class="fa fa-fw fa-angle-left pull-right"></i></span>
-                    </a>
-                    <ul class="treeview-menu">
-                        @can('crm_status_access')
-                            <li class="{{ request()->is('admin/crm-statuses') || request()->is('admin/crm-statuses/*') ? 'active' : '' }}">
-                                <a href="{{ route("admin.crm-statuses.index") }}">
-                                    <i class="fa-fw fas fa-folder">
-
-                                    </i>
-                                    <span>{{ trans('cruds.crmStatus.title') }}</span>
-                                </a>
-                            </li>
-                        @endcan
-                        @can('crm_customer_access')
-                            <li class="{{ request()->is('admin/crm-customers') || request()->is('admin/crm-customers/*') ? 'active' : '' }}">
-                                <a href="{{ route("admin.crm-customers.index") }}">
-                                    <i class="fa-fw fas fa-user-plus">
-
-                                    </i>
-                                    <span>{{ trans('cruds.crmCustomer.title') }}</span>
-                                </a>
-                            </li>
-                        @endcan
-                        @can('crm_note_access')
-                            <li class="{{ request()->is('admin/crm-notes') || request()->is('admin/crm-notes/*') ? 'active' : '' }}">
-                                <a href="{{ route("admin.crm-notes.index") }}">
-                                    <i class="fa-fw fas fa-sticky-note">
-
-                                    </i>
-                                    <span>{{ trans('cruds.crmNote.title') }}</span>
-                                </a>
-                            </li>
-                        @endcan
-                        @can('crm_document_access')
-                            <li class="{{ request()->is('admin/crm-documents') || request()->is('admin/crm-documents/*') ? 'active' : '' }}">
-                                <a href="{{ route("admin.crm-documents.index") }}">
-                                    <i class="fa-fw fas fa-folder">
-
-                                    </i>
-                                    <span>{{ trans('cruds.crmDocument.title') }}</span>
-                                </a>
-                            </li>
-                        @endcan
-                    </ul>
-                </li>
-            @endcan-->
             @can('contact_management_access')
                 <li class="treeview">
                     <a href="#">
@@ -126,6 +74,30 @@
                             </li>
                         @endcan
 
+                            @can('liste_company_access')
+                                <li class="{{ request()->is('admin/companie-liste') || request()->is('admin/companie-liste/*') ? 'active' : '' }}">
+                                    <a href="{{ route("admin.companie-liste.index") }}">
+                                        <i class="fas fa-list"></i>
+
+
+                                        <span>{{ trans('cruds.companieliste.title') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+
+
+                            @can('contact_contact_access')
+                                <li class="{{ request()->is('admin/contact-contacts') || request()->is('admin/contact-contacts/*') ? 'active' : '' }}">
+                                    <a href="{{ route("admin.contact-contacts.index") }}">
+                                        <i class="fa-fw fas fa-user-plus">
+
+                                        </i>
+                                        <span>{{ trans('cruds.contactContact.title') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+
+
                             @can('contact_company_history')
                                 <li class="{{ request()->is('admin/companie-history') || request()->is('admin/companie-history/*') ? 'active' : '' }}">
                                     <a href="{{ route("admin.companie-history") }}">
@@ -137,31 +109,12 @@
                                 </li>
                             @endcan
 
-                        @can('contact_contact_access')
-                            <li class="{{ request()->is('admin/contact-contacts') || request()->is('admin/contact-contacts/*') ? 'active' : '' }}">
-                                <a href="{{ route("admin.contact-contacts.index") }}">
-                                    <i class="fa-fw fas fa-user-plus">
 
-                                    </i>
-                                    <span>{{ trans('cruds.contactContact.title') }}</span>
-                                </a>
-                            </li>
-                        @endcan
                     </ul>
                 </li>
             @endcan
-            @php($unread = \App\QaTopic::unreadCount())
-               <!-- <li class="{{ request()->is('admin/messenger') || request()->is('admin/messenger/*') ? 'active' : '' }}">
-                    <a href="{{ route("admin.messenger.index") }}">
-                        <i class="fa-fw fa fa-envelope">
 
-                        </i>
-                        <span>{{ trans('global.messages') }}</span>
-                        @if($unread > 0)
-                            <strong>( {{ $unread }} )</strong>
-                        @endif
-                    </a>
-                </li>-->
+
                 <li>
                     <a href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                         <i class="fas fa-fw fa-sign-out-alt">

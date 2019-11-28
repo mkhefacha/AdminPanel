@@ -73,7 +73,7 @@ class ContactCompanyController extends Controller
     public function destroy(ContactCompany $contactCompany)
     {
         abort_if(Gate::denies('contact_company_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        User::InActiveUser($contactCompany->id)->update(['active' => 0]);
+        $contactCompany->users()->delete();
         $contactCompany->delete();
 
         return back();
@@ -107,11 +107,19 @@ class ContactCompanyController extends Controller
     public function restore($id)
     {
         $contactCompanies = ContactCompany::withTrashed()->whereId($id)->first();
-        User::where('company_id',$id)->update(['active' => 1]);
+        User::withTrashed()->ActiveUser($id)->restore();
         $contactCompanies->restore();
 
         return redirect()->route('admin.contact-companies.index');
 
     }
+
+           public function liste()
+           {
+
+               return view('admin.contactCompanies.liste');
+
+           }
+
 
 }

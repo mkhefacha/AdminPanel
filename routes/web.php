@@ -29,26 +29,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
     Route::resource('users', 'UsersController');
 
-    // Crm Statuses
-    Route::delete('crm-statuses/destroy', 'CrmStatusController@massDestroy')->name('crm-statuses.massDestroy');
-    Route::resource('crm-statuses', 'CrmStatusController');
-
-    // Crm Customers
-    Route::delete('crm-customers/destroy', 'CrmCustomerController@massDestroy')->name('crm-customers.massDestroy');
-    Route::resource('crm-customers', 'CrmCustomerController');
-
-    // Crm Notes
-    Route::delete('crm-notes/destroy', 'CrmNoteController@massDestroy')->name('crm-notes.massDestroy');
-    Route::resource('crm-notes', 'CrmNoteController');
-
-    // Crm Documents
-    Route::delete('crm-documents/destroy', 'CrmDocumentController@massDestroy')->name('crm-documents.massDestroy');
-    Route::post('crm-documents/media', 'CrmDocumentController@storeMedia')->name('crm-documents.storeMedia');
-    Route::resource('crm-documents', 'CrmDocumentController');
 
     // Contact Companies
     Route::delete('contact-companies/destroy', 'ContactCompanyController@massDestroy')->name('contact-companies.massDestroy');
     route::get('companie-history','ContactCompanyController@history')->name('companie-history');
+    //route::get('companie-liste','ContactCompanyController@liste')->name('companie-liste');
     route::delete('contact-companies/forcedestroy/{id}','ContactCompanyController@forcedestroy')->name('contact-companies.ForceDestroy');
     route::get('contact-companies/restore/{id}','ContactCompanyController@restore')->name('contact-companies.restore');
     Route::resource('contact-companies', 'ContactCompanyController');
@@ -57,16 +42,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('contact-contacts/destroy', 'ContactContactsController@massDestroy')->name('contact-contacts.massDestroy');
     Route::resource('contact-contacts', 'ContactContactsController');
 
-     //envoyer message
-    Route::get('messenger', 'MessengerController@index')->name('messenger.index');
-    /*Route::get('messenger/create', 'MessengerController@createTopic')->name('messenger.createTopic');
-    Route::post('messenger', 'MessengerController@storeTopic')->name('messenger.storeTopic');
-    Route::get('messenger/inbox', 'MessengerController@showInbox')->name('messenger.showInbox');
-    Route::get('messenger/outbox', 'MessengerController@showOutbox')->name('messenger.showOutbox');
-    Route::get('messenger/{topic}', 'MessengerController@showMessages')->name('messenger.showMessages');
-    Route::delete('messenger/{topic}', 'MessengerController@destroyTopic')->name('messenger.destroyTopic');
-    Route::post('messenger/{topic}/reply', 'MessengerController@replyToTopic')->name('messenger.reply');
-    Route::get('messenger/{topic}/reply', 'MessengerController@showReply')->name('messenger.showReply');*/
+     //Liste Companies
+    Route::resource('companie-liste', 'ListeCompanyController');
+
 });
+
+
 //test
-Route::get('/test/{contactCompany}', 'TestController@index');
+Route::get('/test', 'TestController@index');

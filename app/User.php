@@ -91,19 +91,33 @@ class User extends Authenticatable
         return $this->belongsTo(ContactCompany::class, 'company_id');
     }
 
-    public function  scopeActiveUser($query,$field)
+    public function scopeActiveUser($query, $field)
     {
-        return $query->where('company_id',$field);
+        return $query->where('company_id', $field);
 
 
     }
 
 
-    public static  function  scopeInActiveUser($query, $field)
+    public static function scopeInActiveUser($query, $field)
     {
-        return $query->where('company_id',$field);
+        return $query->where('company_id', $field);
 
 
+    }
+
+
+    public function hasRole($role)
+    {
+
+        if ($this->roles()->where('title', $role)->first())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 }
