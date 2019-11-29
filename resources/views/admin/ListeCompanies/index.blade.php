@@ -20,7 +20,7 @@
                     <div class="panel-body">
 
                         <div class="table-responsive">
-                            <table class=" table table-bordered table-striped table-hover datatable datatable-ContactContact">
+                            <table class=" table table-bordered table-striped table-hover datatable datatable-ListeCompany">
                                 <thead>
                                 <tr>
                                     <th width="10">
@@ -44,39 +44,39 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                  @foreach($listecopmpany as $listecompanies)
-                                    <tr >
+                                  @foreach($listecopmpany as $companie_liste)
+                                      <tr data-entry-id="{{$companie_liste->id}}">
                                         <td>
 
                                         </td>
                                         <td>
-                                            {{$listecompanies->liste_name ?? ''  }}
+                                            {{$companie_liste->liste_name ?? ''  }}
                                         </td>
                                         <td>
-                                            {{$listecompanies->company->company_name ?? ''}}
+                                            {{$companie_liste->company->company_name ?? ''}}
                                         </td>
                                         <td>
-                                            {{$listecompanies->creer ?? ''  }}
+                                            {{$companie_liste->creer ?? ''  }}
                                         </td>
                                         <td>
-                                            {{ucwords($listecompanies->created_at->formatlocalized('%d %b %G'))}}
+                                            {{ucwords($companie_liste->created_at->formatlocalized('%d %b %G'))}}
                                         </td>
 
                                         <td>
                                             @can('liste_company_show')
-                                                <a class="btn btn-xs btn-primary" href="{{route('admin.companie-liste.show', $listecompanies->id)}}">
+                                                <a class="btn btn-xs btn-primary" href="{{route('admin.companie-liste.show', $companie_liste->id)}}">
                                                     {{ trans('global.view') }}
                                                 </a>
                                             @endcan
 
                                             @can('liste_company_edit')
-                                                <a class="btn btn-xs btn-info" href="{{route('admin.companie-liste.edit', $listecompanies->id)}}">
+                                                <a class="btn btn-xs btn-info" href="{{route('admin.companie-liste.edit', $companie_liste->id)}}">
                                                     {{ trans('global.edit') }}
                                                 </a>
                                             @endcan
 
                                             @can('liste_company_delete')
-                                                <form action="{{route('admin.companie-liste.destroy',$listecompanies->id)}}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                                <form action="{{route('admin.companie-liste.destroy',$companie_liste->id)}}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                     <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -104,11 +104,11 @@
     <script>
         $(function () {
             let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-                    @can('contact_contact_delete')
+                    @can('liste_company_delete')
             let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
             let deleteButton = {
                 text: deleteButtonTrans,
-                url: "{{ route('admin.contact-contacts.massDestroy') }}",
+                url: "{{ route('admin.companie-liste.massDestroy') }}",
                 className: 'btn-danger',
                 action: function (e, dt, node, config) {
                     var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -135,10 +135,10 @@
             @endcan
 
             $.extend(true, $.fn.dataTable.defaults, {
-                order: [[ 1, 'desc' ]],
-                pageLength: 100,
+                order: [[ 1, 'asc' ]],
+                pageLength: 25,
             });
-            $('.datatable-ContactContact:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+            $('.datatable-ListeCompany:not(.ajaxTable)').DataTable({ buttons: dtButtons })
             $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
                 $($.fn.dataTable.tables(true)).DataTable()
                     .columns.adjust();

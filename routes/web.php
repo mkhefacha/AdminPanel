@@ -43,6 +43,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('contact-contacts', 'ContactContactsController');
 
      //Liste Companies
+    Route::delete('companie-liste/destroy', 'ListeCompanyController@massDestroy')->name('companie-liste.massDestroy');
     Route::resource('companie-liste', 'ListeCompanyController');
 
 });

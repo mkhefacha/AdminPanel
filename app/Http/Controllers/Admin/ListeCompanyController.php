@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\ContactCompany;
 use App\Http\Requests\CompanyListeRequest;
+use App\Http\Requests\MasseDestroyListeRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ListeCompany;
@@ -73,5 +74,13 @@ $companies=ContactCompany::all();
 
         $companie_liste->delete();
         return redirect()->route('admin.companie-liste.index' );
+    }
+
+
+    public function massDestroy(MasseDestroyListeRequest $request)
+    {
+        ListeCompany::whereIn('id', request('ids'))->delete();
+
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }

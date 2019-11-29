@@ -16,7 +16,7 @@
 
                         <div class="form-group {{ $errors->has('liste_name') ? 'has-error' : '' }}">
                             <label for="name">{{ trans('cruds.user.fields.name')}}*</label>
-                            <input type="text" id="liste_name" name="liste_name" class="form-control" value="{{ old('liste_name', isset( $companie_liste) ? $companie_liste->liste_name : '') }}" required>
+                            <input type="text" id="liste_name" name="liste_name" class="form-control" value="{{$companie_liste->liste_name}}" required>
                             @if($errors->has('liste_name'))
                                 <p class="help-block">
                                     {{ $errors->first('liste_name') }}
