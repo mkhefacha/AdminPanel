@@ -120,4 +120,12 @@ class User extends Authenticatable
         }
     }
 
+    public function listeCompanies()
+    {
+        return $this->hasMany(ListeCompany::class, 'user_id', 'id');
+    }
+
+
+
+
 }

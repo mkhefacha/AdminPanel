@@ -23,9 +23,9 @@ class TestController extends Controller
     {
 
         // (auth()->user()->roles()->get());
-        //$roles =auth()->user()->roles()->get();
+       return auth()->user()->name;
 
-        return view('test');
+       // return view('test');
 
 
 

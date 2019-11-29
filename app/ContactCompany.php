@@ -43,8 +43,15 @@ class ContactCompany extends Model
     {
         return $this->hasMany(ContactContact::class, 'company_id', 'id');
     }
+
     public function users()
     {
         return $this->hasMany(User::class, 'company_id', 'id');
     }
+
+    public function llisteCompanies()
+    {
+        return $this->hasMany(ListeCompany::class, 'company_id', 'id');
+    }
+
 }
