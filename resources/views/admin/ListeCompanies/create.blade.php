@@ -14,9 +14,10 @@
                         <form action="{{route('admin.companie-liste.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
 
-                            <div class="form-group">
+                            <div class="form-group {{ $errors->has('liste_name') ? 'has-error' : '' }}">
                                 <label for="name">{{ trans('cruds.user.fields.name') }}*</label>
-                                <input type="text" id="liste_name" name="liste_name" class="form-control" required>
+                                <input type="text" id="liste_name" name="liste_name" class="form-control"
+                                       value="{{ old('name', isset($listeCompany) ? $listeCompany->liste_name : '') }}" required>
                                 @if($errors->has('liste_name'))
                                     <p class="help-block">
                                         {{ $errors->first('liste_name') }}
@@ -30,7 +31,7 @@
                             <div class="form-group ">
                                 <label for="company">{{ trans('cruds.contactContact.fields.company') }}*</label>
                                 <select name="company_id" id="company" class="form-control select2" required>
-                                    <option value="sélectionner" selected>sélectionner</option>
+                                    <option value="sélectionner"  disabled >Select companies</option>
                                     @foreach($companies as $company)
                                         @if($company->status=="Active")
                                             <option value="{{ $company->id }}"{{$listeCompany->company_id == $company->id ?'selected' : ''}}>{{ $company->company_name }}</option>

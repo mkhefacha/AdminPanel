@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <div class="content">
-        @can('contact_contact_create')
+        @can('liste_company_create')
             <div style="margin-bottom: 10px;" class="row">
                 <div class="col-lg-12">
                     <a class="btn btn-success" href="{{ route("admin.companie-liste.create") }}">
@@ -27,84 +27,56 @@
 
                                     </th>
                                     <th>
-
+                                       Liste_name
                                     </th>
                                     <th>
-
+                                        Company_name
                                     </th>
                                     <th>
-
+                                        creér par
                                     <th>
-
+                                        date creation
                                     </th>
-                                    <th>
 
-                                    </th>
-                                    <th>
-
-                                    </th>
-                                    <th>
-
-                                    </th>
-                                    <th>
-
-                                    </th>
-                                    <th>
-
-                                    </th>
                                     <th>
                                         &nbsp;
                                     </th>
                                 </tr>
                                 </thead>
                                 <tbody>
-
+                                  @foreach($listecopmpany as $listecompanies)
                                     <tr >
                                         <td>
 
                                         </td>
                                         <td>
-
+                                            {{$listecompanies->liste_name ?? ''  }}
                                         </td>
                                         <td>
-
+                                            {{$listecompanies->company->company_name ?? ''}}
                                         </td>
                                         <td>
-
+                                            {{$listecompanies->creer ?? ''  }}
                                         </td>
                                         <td>
-
+                                            {{ucwords($listecompanies->created_at->formatlocalized('%d %b %G'))}}
                                         </td>
-                                        <td>
 
-                                        </td>
                                         <td>
-
-                                        </td>
-                                        <td>
-
-                                        </td>
-                                        <td>
-
-                                        </td>
-                                        <td>
-
-                                        </td>
-                                        <td>
-                                            @can('contact_contact_show')
-                                                <a class="btn btn-xs btn-primary" href="">
+                                            @can('liste_company_show')
+                                                <a class="btn btn-xs btn-primary" href="{{route('admin.companie-liste.show', $listecompanies->id)}}">
                                                     {{ trans('global.view') }}
                                                 </a>
                                             @endcan
 
-                                            @can('contact_contact_edit')
-                                                <a class="btn btn-xs btn-info" href="">
+                                            @can('liste_company_edit')
+                                                <a class="btn btn-xs btn-info" href="{{route('admin.companie-liste.edit', $listecompanies->id)}}">
                                                     {{ trans('global.edit') }}
                                                 </a>
                                             @endcan
 
-                                            @can('contact_contact_delete')
-                                                <form action="" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                            @can('liste_company_delete')
+                                                <form action="{{route('admin.companie-liste.destroy',$listecompanies->id)}}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                     <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -114,7 +86,7 @@
                                         </td>
 
                                     </tr>
-
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

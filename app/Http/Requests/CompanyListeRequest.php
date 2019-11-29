@@ -21,7 +21,7 @@ class CompanyListeRequest extends FormRequest
     {
         return [
             'liste_name' => 'required',
-            'company_id' => 'required',
+            'company_id' => 'required', 'integer',
         ];
     }
 
@@ -30,7 +30,7 @@ class CompanyListeRequest extends FormRequest
         return [
 
             'liste_name.required' => "le nom de la liste doit etre  obligatoire",
-            'company_id' => "le company doit etre obligatoire"
+            'company_id.required' => "le company doit etre obligatoire"
         ];
     }
 

@@ -17,6 +17,7 @@
                         <div class="form-group {{ $errors->has('company_id') ? 'has-error' : '' }}">
                             <label for="company">{{ trans('cruds.contactContact.fields.company') }}*</label>
                             <select name="company_id" id="company" class="form-control select2" required>
+
                                 @foreach($companies as $id => $company)
                                     <option value="{{ $id }}" {{ (isset($contactContact) && $contactContact->company ? $contactContact->company->id : old('company_id')) == $id ? 'selected' : '' }}>{{ $company }}</option>
                                 @endforeach
