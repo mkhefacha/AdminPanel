@@ -27,13 +27,14 @@
                                 </p>
                             </div>
 
+                             @if(auth()->user()->hasRole('Admin'))
                             <div class="form-group ">
                                 <label for="company">{{ trans('cruds.contactContact.fields.company') }}*</label>
-                                <select name="company_id" id="company" class="form-control select2" required>
+                               <select name="company_id" id="company" class="form-control select2" required>
                                     <option value="sélectionner"  disabled >Select companies</option>
                                     @foreach($companies as $company)
                                         @if($company->status=="Active")
-                                            <option value="{{ $company->id }}"{{$listeCompany->company_id == $company->id ?'selected' : ''}}>{{ $company->company_name }}</option>
+                                            <option value="{{ $company->id }}"{{$listeCompany->company_id == $company->id ?'selected' : ''}}>{{$company->company_name}}</option>
                                         @endif
                                     @endforeach
                                 </select>
@@ -43,6 +44,18 @@
                                     </p>
                                 @endif
                             </div>
+                            @else
+                                <div class="form-group">
+                                    <label for="name">{{ trans('cruds.contactContact.fields.company') }}*</label>
+                                    <select name="company_id" id="company" class="form-control select2">
+                                    @foreach ( $companies as $company)
+                                        @if(auth()->user()->company_id == $company->id)
+                                                <option value="{{ $company->id }}">{{ $company->company_name }}</option>
+                                        @endif
+                                    @endforeach
+                                    </select>
+                                </div>
+                         @endif
 
                             <div>
                                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">

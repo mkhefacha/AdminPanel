@@ -55,7 +55,7 @@ class ContactCompanyController extends Controller
             User::ActiveUser($contactCompany->id)->update(['active' => 1]);
             $contactCompany->update($request->except('token'));
         } else {
-            User::InActiveUser($contactCompany->id)->update(['active' => 0]);
+            User::ActiveUser($contactCompany->id)->update(['active' => 0]);
             $contactCompany->update($request->except('token'));
         }
 
@@ -73,6 +73,7 @@ class ContactCompanyController extends Controller
     public function destroy(ContactCompany $contactCompany)
     {
         abort_if(Gate::denies('contact_company_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $contactCompany->users()->delete();
         $contactCompany->delete();
 

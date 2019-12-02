@@ -22,10 +22,16 @@ class TestController extends Controller
     public function index()
     {
 
-        // (auth()->user()->roles()->get());
-       return auth()->user()->name;
+       // (auth()->user()->hasRole('Admin')){
+         //   auth()->user()->name;
 
        // return view('test');
+
+      $companies=ContactCompany::all();
+        return view('test', compact('companies'));
+
+
+
 
 
 

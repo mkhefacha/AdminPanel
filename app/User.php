@@ -99,13 +99,6 @@ class User extends Authenticatable
     }
 
 
-    public static function scopeInActiveUser($query, $field)
-    {
-        return $query->where('company_id', $field);
-
-
-    }
-
 
     public function hasRole($role)
     {
@@ -124,6 +117,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(ListeCompany::class, 'user_id', 'id');
     }
+
+
+
+
 
 
 
