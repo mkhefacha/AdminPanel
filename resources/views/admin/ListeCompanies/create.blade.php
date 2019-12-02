@@ -27,7 +27,7 @@
                                 </p>
                             </div>
 
-                             @if(auth()->user()->hasRole('Admin'))
+                             @if(auth()->user()->hasRole('Superadmin'))
                             <div class="form-group ">
                                 <label for="company">{{ trans('cruds.contactContact.fields.company') }}*</label>
                                <select name="company_id" id="company" class="form-control select2" required>

@@ -10,8 +10,8 @@ class UsersTableSeeder extends Seeder
         $users = [
             [
                 'id'             => 1,
-                'name'           => 'Admin',
-                'email'          => 'admin@admin.com',
+                'name'           => 'Superadmin',
+                'email'          => 'superadmin@admin.com',
                 'active'         =>1,
                 'password'       => '$2y$10$2BLwY8QnM5GOQDrzTncCz.OOlMoJFWIAX.6YUcbAMyxOH06ZS.1AG',
                 'remember_token' => null,

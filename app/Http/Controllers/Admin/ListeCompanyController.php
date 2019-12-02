@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ListeCompany;
 use Gate;
+use App\User;
 use Symfony\Component\HttpFoundation\Response;
 
 class ListeCompanyController extends Controller

@@ -5,7 +5,7 @@
             <div style="margin-bottom: 10px;" class="row">
                 <div class="col-lg-12">
                     <a class="btn btn-success" href="{{ route("admin.companie-liste.create") }}">
-                      Ajouter Liste
+                        Ajouter Liste
                     </a>
                 </div>
             </div>
@@ -15,7 +15,7 @@
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Ajouter Liste
+                        Liste
                     </div>
                     <div class="panel-body">
 
@@ -27,13 +27,13 @@
 
                                     </th>
                                     <th>
-                                       Liste_name
+                                        Liste_name
                                     </th>
                                     <th>
                                         Company_name
                                     </th>
                                     <th>
-                                       Réaliser par
+                                        Réaliser par
                                     <th>
                                         date creation
                                     </th>
@@ -43,51 +43,16 @@
                                     </th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                  @foreach($listecopmpany as $companie_liste)
-                                      <tr data-entry-id="{{$companie_liste->id}}">
-                                        <td>
 
-                                        </td>
-                                        <td>
-                                            {{$companie_liste->liste_name ?? ''  }}
-                                        </td>
-                                        <td>
-                                            {{$companie_liste->company->company_name ?? ''}}
-                                        </td>
-                                        <td>
-                                            {{$companie_liste->creer ?? ''  }}
-                                        </td>
-                                        <td>
-                                            {{ucwords($companie_liste->created_at->formatlocalized('%d %b %G'))}}
-                                        </td>
-
-                                        <td>
-                                            @can('liste_company_show')
-                                                <a class="btn btn-xs btn-primary" href="{{route('admin.companie-liste.show', $companie_liste->id)}}">
-                                                    {{ trans('global.view') }}
-                                                </a>
-                                            @endcan
-
-                                            @can('liste_company_edit')
-                                                <a class="btn btn-xs btn-info" href="{{route('admin.companie-liste.edit', $companie_liste->id)}}">
-                                                    {{ trans('global.edit') }}
-                                                </a>
-                                            @endcan
-
-                                            @can('liste_company_delete')
-                                                <form action="{{route('admin.companie-liste.destroy',$companie_liste->id)}}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                                                    <input type="hidden" name="_method" value="DELETE">
-                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                                </form>
-                                            @endcan
-
-                                        </td>
-
-                                    </tr>
-                                    @endforeach
-                                </tbody>
+                                @if(auth()->user()->hasRole('Superadmin'))
+                                    <tbody>
+                                    @include('admin.ListeCompanies.formliste')
+                                    </tbody>
+                                @else
+                                    <tbody>
+                                    @include('admin.ListeCompanies.userformliste')
+                                    </tbody>
+                                @endif
                             </table>
                         </div>
 
@@ -111,7 +76,7 @@
                 url: "{{ route('admin.companie-liste.massDestroy') }}",
                 className: 'btn-danger',
                 action: function (e, dt, node, config) {
-                    var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
+                    var ids = $.map(dt.rows({selected: true}).nodes(), function (entry) {
                         return $(entry).data('entry-id')
                     });
 
@@ -126,8 +91,11 @@
                             headers: {'x-csrf-token': _token},
                             method: 'POST',
                             url: config.url,
-                            data: { ids: ids, _method: 'DELETE' }})
-                            .done(function () { location.reload() })
+                            data: {ids: ids, _method: 'DELETE'}
+                        })
+                            .done(function () {
+                                location.reload()
+                            })
                     }
                 }
             }
@@ -135,11 +103,11 @@
             @endcan
 
             $.extend(true, $.fn.dataTable.defaults, {
-                order: [[ 1, 'asc' ]],
+                order: [[1, 'asc']],
                 pageLength: 25,
             });
-            $('.datatable-ListeCompany:not(.ajaxTable)').DataTable({ buttons: dtButtons })
-            $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+            $('.datatable-ListeCompany:not(.ajaxTable)').DataTable({buttons: dtButtons})
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                 $($.fn.dataTable.tables(true)).DataTable()
                     .columns.adjust();
             });
