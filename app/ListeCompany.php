@@ -27,4 +27,9 @@ class ListeCompany extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function contactContacts()
+    {
+        return $this->hasMany(ContactContact::class, 'company_id', 'id');
+    }
+
 }

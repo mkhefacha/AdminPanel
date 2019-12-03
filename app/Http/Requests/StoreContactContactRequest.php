@@ -19,10 +19,25 @@ class StoreContactContactRequest extends FormRequest
     public function rules()
     {
         return [
-            'company_id' => [
-                'required',
-                'integer',
-            ],
+          //  'contact_email'=>'unique:ContactContact',
+            //'contact_phone_1'=>'unique:ContactContact',
+           // 'contact_phone_2'=>'required',
         ];
     }
+
+    public function persist()
+    {
+
+        ContactContact::create([
+            'contact_name' => request('contact_name'),
+            'company_id' => request('company_id'),
+            'contact_phone_1'=>request('contact_phone_1'),
+            'contact_phone_2'=>request('contact_phone_2'),
+            'contact_email'=>request('contact_email'),
+            'liste_id'=>request('liste_id'),
+            'user_id' =>auth()->id(),
+            'contact_creer'=>auth()->user()->name,
+        ]);
+    }
+
 }

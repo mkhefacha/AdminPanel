@@ -11,9 +11,7 @@ class CreateContactContactsTable extends Migration
         Schema::create('contact_contacts', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('contact_first_name')->nullable();
-
-            $table->string('contact_last_name')->nullable();
+            $table->string('contact_name')->nullable();
 
             $table->string('contact_phone_1')->nullable();
 
@@ -21,9 +19,7 @@ class CreateContactContactsTable extends Migration
 
             $table->string('contact_email')->nullable();
 
-            $table->string('contact_skype')->nullable();
-
-            $table->string('contact_address')->nullable();
+            $table->string('contact_creer');
 
             $table->timestamps();
 

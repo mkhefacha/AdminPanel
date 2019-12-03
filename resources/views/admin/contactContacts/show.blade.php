@@ -32,18 +32,18 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.contactContact.fields.contact_first_name') }}
+                                     contact_name
                                     </th>
                                     <td>
-                                        {{ $contactContact->contact_first_name }}
+                                        {{ $contactContact->contact_name ?? '' }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.contactContact.fields.contact_last_name') }}
+                                        Liste_name
                                     </th>
                                     <td>
-                                        {{ $contactContact->contact_last_name }}
+                                        {{ $contactContact->ListeCompany->liste_name ?? ''}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -72,18 +72,18 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.contactContact.fields.contact_skype') }}
+                                        Réaliser Par
                                     </th>
                                     <td>
-                                        {{ $contactContact->contact_skype }}
+                                        {{ $contactContact->contact_creer ?? '' }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.contactContact.fields.contact_address') }}
+                                       Created_at
                                     </th>
                                     <td>
-                                        {{ $contactContact->contact_address }}
+                                        {{ucwords($contactContact->created_at->formatlocalized('%d %b %G'))}}
                                     </td>
                                 </tr>
                             </tbody>

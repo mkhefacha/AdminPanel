@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyContactContactRequest;
 use App\Http\Requests\StoreContactContactRequest;
 use App\Http\Requests\UpdateContactContactRequest;
+use App\ListeCompany;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,27 +28,32 @@ class ContactContactsController extends Controller
     {
         abort_if(Gate::denies('contact_contact_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $companies = ContactCompany::all()->pluck('company_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.contactContacts.create', compact('companies'));
+        $companies = ContactCompany::all();
+        $listes=ListeCompany::all();
+
+        return view('admin.contactContacts.create', compact('companies','listes'));
     }
 
     public function store(StoreContactContactRequest $request)
     {
-        ContactContact::create($request->all());
+        $request->persist();
 
         return redirect()->route('admin.contact-contacts.index');
     }
+
+
 
     public function edit(ContactContact $contactContact)
     {
         abort_if(Gate::denies('contact_contact_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $companies = ContactCompany::all()->pluck('company_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $companies = ContactCompany::all();
+        $listes=ListeCompany::all();
 
         $contactContact->load('company');
 
-        return view('admin.contactContacts.edit', compact('companies', 'contactContact'));
+        return view('admin.contactContacts.edit', compact('companies', 'contactContact','listes'));
     }
 
     public function update(UpdateContactContactRequest $request, ContactContact $contactContact)

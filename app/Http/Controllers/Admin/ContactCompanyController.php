@@ -51,13 +51,15 @@ class ContactCompanyController extends Controller
     public function update(UpdateContactCompanyRequest $request, ContactCompany $contactCompany)
     {
 
-        if ($contactCompany->status == "Inactive") {
+        if ($contactCompany->status == "Inactive")
+        {
             User::ActiveUser($contactCompany->id)->update(['active' => 1]);
             $contactCompany->update($request->except('token'));
-        } else {
+        } else
+            {
             User::ActiveUser($contactCompany->id)->update(['active' => 0]);
             $contactCompany->update($request->except('token'));
-        }
+            }
 
         return redirect()->route('admin.contact-companies.index');
     }
@@ -114,13 +116,6 @@ class ContactCompanyController extends Controller
         return redirect()->route('admin.contact-companies.index');
 
     }
-
-           public function liste()
-           {
-
-               return view('admin.contactCompanies.liste');
-
-           }
 
 
 }

@@ -22,12 +22,13 @@ class ContactContact extends Model
         'updated_at',
         'deleted_at',
         'contact_email',
-        'contact_skype',
         'contact_phone_1',
         'contact_phone_2',
-        'contact_address',
-        'contact_last_name',
-        'contact_first_name',
+        'contact_name',
+        'contact_creer',
+        'user_id',
+        'liste_id',
+
     ];
 
 
@@ -36,6 +37,15 @@ class ContactContact extends Model
         return $this->belongsTo(ContactCompany::class, 'company_id');
     }
 
+    public function ListeCompany()
+    {
+        return $this->belongsTo(ListeCompany::class, 'liste_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
 
 }
