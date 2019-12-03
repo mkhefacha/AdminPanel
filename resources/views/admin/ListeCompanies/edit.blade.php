@@ -27,23 +27,45 @@
                             </p>
                         </div>
 
+                        @if(auth()->user()->hasRole('Superadmin'))
 
                         <div class="form-group {{ $errors->has('company_id') ? 'has-error' : '' }}">
-                            <label for="company">{{ trans('cruds.contactContact.fields.company') }}*</label>
-                            <select name="company_id" id="company" class="form-control select2" required>
-                                <option value="sélectionner"  disabled >Select companies</option>
-                                @foreach($companies as $company)
-                                    @if($company->status=="Active")
-                                        <option value="{{ $company->id }}"{{ $companie_liste->company_id == $company->id ?'selected' : ''}}>{{ $company->company_name }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                            @if($errors->has('company_id'))
-                                <p class="help-block">
-                                    {{ $errors->first('company_id') }}
-                                </p>
-                            @endif
-                        </div>
+                                <label for="company">{{ trans('cruds.contactContact.fields.company') }}*</label>
+                                <select name="company_id" id="company" class="form-control select2" required>
+                                    <option value="sélectionner"  disabled >Select companies</option>
+                                    @foreach($companies as $company)
+                                        @if($company->status=="Active")
+                                            <option value="{{ $company->id }}"{{ $companie_liste->company_id == $company->id ?'selected' : ''}}>{{ $company->company_name }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                @if($errors->has('company_id'))
+                                    <p class="help-block">
+                                        {{ $errors->first('company_id') }}
+                                    </p>
+                                @endif
+                            </div>
+                            @else
+                            <div class="form-group {{ $errors->has('company_id') ? 'has-error' : '' }}">
+                                <label for="company">{{ trans('cruds.contactContact.fields.company') }}*</label>
+                                <select name="company_id" id="company" class="form-control select2" required>
+                                    <option value="sélectionner"  disabled >Select companies</option>
+                                    @foreach($companies as $company)
+
+                                            @if(auth()->user()->company_id==$company->id)
+                                            <option value="{{ $company->id }}"{{ $companie_liste->company_id == $company->id ?'selected' : ''}}>{{ $company->company_name }}</option>
+                                         @endif
+
+                                    @endforeach
+                                </select>
+                                @if($errors->has('company_id'))
+                                    <p class="help-block">
+                                        {{ $errors->first('company_id') }}
+                                    </p>
+                                @endif
+                            </div>
+                               @endif
+
                         <div>
                             <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
                         </div>

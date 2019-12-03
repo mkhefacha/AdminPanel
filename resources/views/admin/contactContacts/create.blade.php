@@ -62,7 +62,7 @@
                             <select name="liste_id" id="liste" class="form-control select2" required>
                                 <option value="sélectionner"  disabled >Select listes</option>
                                 @foreach($listes as $liste)
-                                    @if(auth()->user()->liste_id == $liste->id)
+                                    @if(auth()->user()->company_id== $liste->company_id)
                                         <option value="{{ $liste->id }}">{{ $liste->liste_name }}</option>
                                    @endif
                                 @endforeach

@@ -14,40 +14,11 @@
                     <form action="{{ route("admin.contact-contacts.update", [$contactContact->id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-
-                        <div class="form-group {{ $errors->has('company_id') ? 'has-error' : '' }}">
-                            <label for="company">{{ trans('cruds.contactContact.fields.company') }}*</label>
-                            <select name="company_id" id="company" class="form-control select2" required>
-                                <option value="sélectionner"  disabled >Select companies</option>
-                                @foreach($companies as $company)
-                                    @if($company->status=="Active")
-                                        <option value="{{ $company->id }}"{{  $contactContact->company_id == $company->id ?'selected' : ''}}>{{ $company->company_name }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                            @if($errors->has('company_id'))
-                                <p class="help-block">
-                                    {{ $errors->first('company_id') }}
-                                </p>
-                            @endif
-                        </div>
-
-
-                        <div class="form-group {{ $errors->has('liste_id') ? 'has-error' : '' }}">
-                            <label for="liste">liste*</label>
-                            <select name="liste_id" id="liste" class="form-control select2" required>
-                                <option value="sélectionner"  disabled >Select listes</option>
-                                @foreach($listes as $liste)
-                                    <option value="{{ $liste->id }}" {{  $contactContact->liste_id == $liste->id ?'selected' : ''}}>{{ $liste->liste_name }}</option>
-                                @endforeach
-                            </select>
-                            @if($errors->has('liste_id'))
-                                <p class="help-block">
-                                    {{ $errors->first('liste_id') }}
-                                </p>
-                            @endif
-                        </div>
-
+                        @if(auth()->user()->hasRole('Superadmin'))
+                            @include('admin.contactContacts.adminformmodifie')
+                            @else
+                            @include('admin.contactContacts.usercontactmodifie')
+                        @endif
                         <div class="form-group {{ $errors->has('contact_name') ? 'has-error' : '' }}">
                             <label for="contact_name">name</label>
                             <input type="text" id="contact_name" name="contact_name" class="form-control" value="{{ old('contact_name', isset($contactContact) ? $contactContact->contact_name : '') }}">
