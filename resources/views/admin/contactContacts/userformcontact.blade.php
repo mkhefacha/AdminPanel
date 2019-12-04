@@ -1,5 +1,5 @@
 @foreach($contactContacts as $contactContact)
-    @if  ((auth()->id()==$contactContact->user_id) || ( auth()->user()->hasrole('admin') && (auth()->user()->company_id == $contactContact->company_id)))
+    @if  ((auth()->user()->company_id == $contactContact->company_id) || ( auth()->user()->hasrole('admin') && (auth()->user()->company_id == $contactContact->company_id)))
     <tr data-entry-id="{{ $contactContact->id }}">
         <td>
 

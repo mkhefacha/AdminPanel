@@ -87,6 +87,8 @@
                                                 </a>
                                             @endcan
 
+
+
                                             @can('user_edit')
                                                 <a class="btn btn-xs btn-info" href="{{ route('admin.users.edit', $user->id) }}">
                                                     {{ trans('global.edit') }}
@@ -100,6 +102,7 @@
                                                     <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
                                                 </form>
                                             @endcan
+
 
                                         </td>
 

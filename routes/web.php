@@ -50,4 +50,4 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
 
 //test
-Route::get('/test', 'TestController@index');
+Route::get('/test/{id}', 'TestController@index');

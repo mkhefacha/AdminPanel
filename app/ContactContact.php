@@ -1,7 +1,9 @@
 <?php
 
 namespace App;
-
+use App\User;
+use auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 class ContactContact extends Model
@@ -46,6 +48,52 @@ class ContactContact extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function getContactPhone1Attribute($value)
+    {
+
+          if (auth()->user()->hasRole('User'))
+          {
+              return substr_replace($value ,"****",2,4);
+          }
+          else
+              return ($value);
+
+
+    }
+
+
+    public function getContactPhone2Attribute($value)
+    {
+        if (auth()->user()->hasRole('User'))
+        {
+            return substr_replace($value ,"****",2,4);
+        }
+        else
+            return ($value);
+
+    }
+
+    public function getContactEmailAttribute($value)
+    {
+        $mystring = $value;
+        $mystring = substr($mystring, 0, strpos($mystring, "@"));
+
+        if (auth()->user()->hasRole('User'))
+
+        {
+                 {
+                     return str_replace($mystring ,"****", $value);
+                 }
+
+        }
+        else
+
+            return ($value);
+
+    }
+
+
+
 
 
 }

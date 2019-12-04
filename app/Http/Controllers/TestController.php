@@ -10,38 +10,22 @@ use Auth;
 class TestController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-  public function hasRole()
-  {
-
-  }
-    public function index()
-    {
-
-       // (auth()->user()->hasRole('Admin')){
-         //   auth()->user()->name;
-
-       // return view('test');
-
-      $companies=ContactCompany::all();
-        return view('test', compact('companies'));
 
 
+        public function index($id)
+
+        {
+            $user=User::find($id);
 
 
+            //$company=ContactCompany::find($id);
+           // foreach ($user as $users)
+            //{
+                 dump ($user->company->company_name ?? '');
+
+            //};
+        }
 
 
-        //  return $contactCompany->users()->get();
-
-        //return view('test', compact('contactCompany'));
-       // $companies = ContactCompany::whereId($contactCompany->id)->get();
-        //return $contactCompany->id;
-    //  return $companies;
-
-    }
 }
 
