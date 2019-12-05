@@ -39,7 +39,7 @@ class ContactContact extends Model
         return $this->belongsTo(ContactCompany::class, 'company_id');
     }
 
-    public function ListeCompany()
+    public function ListeCompanie()
     {
         return $this->belongsTo(ListeCompany::class, 'liste_id');
     }
@@ -51,12 +51,18 @@ class ContactContact extends Model
     public function getContactPhone1Attribute($value)
     {
 
-          if (auth()->user()->hasRole('User'))
+
+
+
+
+          if ((auth()->id()==$this->user_id) || (auth()->user()->hasRole('Superadmin')) || (auth()->user()->hasRole('Admin')))
           {
-              return substr_replace($value ,"****",2,4);
-          }
-          else
               return ($value);
+          }
+
+          else
+
+              return substr_replace($value ,"****",2,4);
 
 
     }
@@ -64,31 +70,33 @@ class ContactContact extends Model
 
     public function getContactPhone2Attribute($value)
     {
-        if (auth()->user()->hasRole('User'))
+
+        if ((auth()->id()==$this->user_id) || (auth()->user()->hasRole('Superadmin')) || (auth()->user()->hasRole('Admin')))
         {
-            return substr_replace($value ,"****",2,4);
-        }
-        else
             return ($value);
+
+        }
+
+        else
+
+            return substr_replace($value ,"****",2,4);
 
     }
 
     public function getContactEmailAttribute($value)
     {
         $mystring = $value;
-        $mystring = substr($mystring, 0, strpos($mystring, "@"));
+        $mystring = substr($mystring, 1, strpos($mystring, "@"));
 
-        if (auth()->user()->hasRole('User'))
-
+        if ((auth()->id()==$this->user_id) || (auth()->user()->hasRole('Superadmin')) || (auth()->user()->hasRole('Admin')))
         {
-                 {
-                     return str_replace($mystring ,"****", $value);
-                 }
+            return ($value);
 
         }
+
         else
 
-            return ($value);
+            return str_replace($mystring ,"****", $value);
 
     }
 

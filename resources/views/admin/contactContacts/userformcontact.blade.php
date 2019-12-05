@@ -11,7 +11,7 @@
             {{ $contactContact->company->company_name ?? ''}}
         </td>
         <td>
-            {{ $contactContact->ListeCompany->liste_name ?? ''}}
+            {{ $contactContact->ListeCompanie->liste_name ?? ''}}
         </td>
         <td>
             {{ $contactContact->contact_name ?? '' }}

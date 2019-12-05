@@ -1,6 +1,8 @@
 
-@foreach ( $company->users as $user)
-    {{$user->name}}
+
+@foreach ($liste_Company->contactContacts as $contactContacts)
+
+    {{$contactContacts->contact_name}}<br>
 @endforeach
 
 

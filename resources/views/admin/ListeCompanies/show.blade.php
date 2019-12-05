@@ -52,6 +52,9 @@
                             <a style="margin-top:20px;" class="btn btn-default" href="{{ url()->previous() }}">
                                 {{ trans('global.back_to_list') }}
                             </a>
+                          <a style="margin-top:20px;" class="btn btn-success" href="{{route('admin.liste-contact', $companie_liste)}}">
+                               afficher contact
+                            </a>
                         </div>
 
 

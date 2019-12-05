@@ -49,7 +49,7 @@ class ContactCompany extends Model
         return $this->hasMany(User::class, 'company_id', 'id');
     }
 
-    public function llisteCompanies()
+    public function listeCompanies()
     {
         return $this->hasMany(ListeCompany::class, 'company_id', 'id');
     }

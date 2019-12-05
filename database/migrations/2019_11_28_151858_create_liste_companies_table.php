@@ -16,10 +16,13 @@ class CreateListeCompaniesTable extends Migration
         Schema::create('liste_companies', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('liste_name');
+
             $table->unsignedInteger('user_id')->nullable();
-            $table->foreign('user_id', 'user_id_fk_621306')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->unsignedInteger('company_id')->nullable();
-            $table->foreign('company_id', 'company_fk_623817')->references('id')->on('contact_companies');
+            $table->foreign('company_id')->references('id')->on('contact_companies');
+
             $table->timestamps();
             $table->softDeletes();
         });

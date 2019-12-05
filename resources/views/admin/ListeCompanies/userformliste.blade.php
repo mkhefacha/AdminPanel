@@ -1,7 +1,7 @@
 
 @foreach($listecopmpany as $companie_liste)
 
-     @if  ((auth()->id()==$companie_liste->user_id) || ( auth()->user()->hasrole('admin') && (auth()->user()->company_id == $companie_liste->company_id)))
+     @if  ((auth()->user()->company_id == $companie_liste->company_id) || ( auth()->user()->hasrole('admin') && (auth()->user()->company_id == $companie_liste->company_id)))
     <tr data-entry-id="{{$companie_liste->id}}">
         <td>
 

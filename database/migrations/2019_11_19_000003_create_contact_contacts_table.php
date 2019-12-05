@@ -21,6 +21,19 @@ class CreateContactContactsTable extends Migration
 
             $table->string('contact_creer');
 
+
+            $table->unsignedInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->unsignedInteger('company_id')->nullable();
+            $table->foreign('company_id')->references('id')->on('contact_companies');
+
+            $table->unsignedInteger('liste_id')->nullable();
+            $table->foreign('liste_id')->references('id')->on('liste_companies');
+
+
+
+
             $table->timestamps();
 
             $table->softDeletes();

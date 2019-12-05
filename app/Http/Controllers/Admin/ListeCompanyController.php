@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use App\ContactContact;
 use App\ContactCompany;
 use App\Http\Requests\CompanyListeRequest;
 use App\Http\Requests\MasseDestroyListeRequest;
@@ -81,4 +81,18 @@ class ListeCompanyController extends Controller
 
         return response(null, Response::HTTP_NO_CONTENT);
     }
+
+    public function contactListe(ListeCompany $companie_liste)
+
+    {
+
+        $contactContacts=ContactContact::all();
+
+        return view('admin.listeCompanies.contactliste',compact('companie_liste','contactContacts'));
+    }
+
+
+
+
+
 }

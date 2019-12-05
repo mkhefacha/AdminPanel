@@ -45,9 +45,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
      //Liste Companies
     Route::delete('companie-liste/destroy', 'ListeCompanyController@massDestroy')->name('companie-liste.massDestroy');
     Route::resource('companie-liste', 'ListeCompanyController');
+    Route::get('companie-liste/{companie_liste}/liste-contact', 'ListeCompanyController@contactListe')->name('liste-contact');
 
 });
 
 
 //test
-Route::get('/test/{id}', 'TestController@index');
+Route::get('/test', 'TestController@index');
