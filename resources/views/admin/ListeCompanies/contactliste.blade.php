@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <div class="content">
-    Liste de Contact
+        Liste de Contact
         <div class="row">
             <div class="col-lg-12">
 
@@ -50,8 +50,9 @@
                                     </th>
                                 </tr>
                                 </thead>
-                                @foreach($contactContacts as $contactContact)
-                                    @if($companie_liste->id==$contactContact->liste_id)
+                                @if(auth()->user()->hasRole('Superadmin'))
+                                    @foreach( $companie_liste->contactContacts as $contactContact)
+
                                         <tr data-entry-id="{{ $contactContact->id }}">
                                             <td>
 
@@ -84,30 +85,36 @@
                                                 {{ucwords($contactContact->created_at->formatlocalized('%d %b %G'))}}
                                             </td>
                                             <td>
-
-                                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.contact-contacts.show', $contactContact->id) }}">
+                                                @can('liste_company_show')
+                                                    <a class="btn btn-xs btn-primary"
+                                                       href="{{ route('admin.contact-contacts.show', $contactContact->id) }}">
                                                         {{ trans('global.view') }}
                                                     </a>
+                                                @endcan
 
-
+                                                @can('envoyer_sms')
                                                     <a class="btn btn-xs btn-info" href="#">
                                                         Envoyer SMS
                                                     </a>
+                                                @endcan
 
-
-
-                                                        <a class="btn btn-xs btn-danger" href="#">
-                                                            Envoyer Email
-                                                        </a>
-
+                                                @can('envoyer_email')
+                                                    <a class="btn btn-xs btn-danger" href="#">
+                                                        Envoyer Email
+                                                    </a>
+                                                @endcan
 
                                             </td>
 
                                         </tr>
-                                    @endif
-                                @endforeach
+
+                                    @endforeach
+                                @else
+                                    @include('admin.ListeCompanies.usercontactliste')
+                                @endif
                             </table>
-                            <a style="margin-top:20px;" class="btn btn-default" href="{{ route('admin.companie-liste.index') }}">
+                            <a style="margin-top:20px;" class="btn btn-default"
+                               href="{{ route('admin.companie-liste.index') }}">
                                 {{ trans('global.back_to_list') }}
                             </a>
                         </div>
@@ -132,7 +139,7 @@
                 url: "{{ route('admin.contact-contacts.massDestroy') }}",
                 className: 'btn-danger',
                 action: function (e, dt, node, config) {
-                    var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
+                    var ids = $.map(dt.rows({selected: true}).nodes(), function (entry) {
                         return $(entry).data('entry-id')
                     });
 
@@ -147,8 +154,11 @@
                             headers: {'x-csrf-token': _token},
                             method: 'POST',
                             url: config.url,
-                            data: { ids: ids, _method: 'DELETE' }})
-                            .done(function () { location.reload() })
+                            data: {ids: ids, _method: 'DELETE'}
+                        })
+                            .done(function () {
+                                location.reload()
+                            })
                     }
                 }
             }
@@ -156,11 +166,11 @@
             @endcan
 
             $.extend(true, $.fn.dataTable.defaults, {
-                order: [[ 1, 'desc' ]],
+                order: [[1, 'desc']],
                 pageLength: 100,
             });
-            $('.datatable-ContactContact:not(.ajaxTable)').DataTable({ buttons: dtButtons })
-            $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+            $('.datatable-ContactContact:not(.ajaxTable)').DataTable({buttons: dtButtons})
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                 $($.fn.dataTable.tables(true)).DataTable()
                     .columns.adjust();
             });

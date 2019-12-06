@@ -92,6 +92,7 @@ class ContactCompanyController extends Controller
     public function history()
 
     {
+    abort_if(Gate::denies('contact_company_history'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $contactCompanies = ContactCompany::onlyTrashed()->get();
 
         return view('admin.contactCompanies.history', compact('contactCompanies'));

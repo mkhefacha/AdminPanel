@@ -79,7 +79,6 @@
                                     <a href="{{ route("admin.companie-liste.index") }}">
                                         <i class="fas fa-list"></i>
 
-
                                         <span>{{ trans('cruds.companieliste.title') }}</span>
                                     </a>
                                 </li>

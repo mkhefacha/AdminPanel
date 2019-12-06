@@ -1,5 +1,5 @@
-@foreach($contactContacts as $contactContact)
-    @if  ((auth()->user()->company_id == $contactContact->company_id) || ( auth()->user()->hasrole('admin') && (auth()->user()->company_id == $contactContact->company_id)))
+@foreach( $companie_liste->contactContacts as $contactContact)
+@if (auth()->user()->company_id==$contactContact->company_id)
     <tr data-entry-id="{{ $contactContact->id }}">
         <td>
 
@@ -32,26 +32,27 @@
             {{ucwords($contactContact->created_at->formatlocalized('%d %b %G'))}}
         </td>
         <td>
-            @can('contact_contact_show')
-                <a class="btn btn-xs btn-primary" href="{{ route('admin.contact-contacts.show', $contactContact->id) }}">
+            @can('liste_company_show')
+                <a class="btn btn-xs btn-primary"
+                   href="{{ route('admin.contact-contacts.show', $contactContact->id) }}">
                     {{ trans('global.view') }}
                 </a>
             @endcan
 
             @can('envoyer_sms')
                 <a class="btn btn-xs btn-info" href="#">
-                  Envoyer SMS
+                    Envoyer SMS
                 </a>
             @endcan
 
-                @can('envoyer_email')
-                    <a class="btn btn-xs btn-danger" href="#">
-                        Envoyer Email
-                    </a>
-                @endcan
+            @can('envoyer_email')
+                <a class="btn btn-xs btn-danger" href="#">
+                    Envoyer Email
+                </a>
+            @endcan
 
         </td>
 
     </tr>
-    @endif
+@endif
 @endforeach

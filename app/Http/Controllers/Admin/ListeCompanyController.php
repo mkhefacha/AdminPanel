@@ -85,10 +85,16 @@ class ListeCompanyController extends Controller
     public function contactListe(ListeCompany $companie_liste)
 
     {
+        abort_if(Gate::denies('liste_contact'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $contactContacts=ContactContact::all();
 
-        return view('admin.listeCompanies.contactliste',compact('companie_liste','contactContacts'));
+
+               return view('admin.listeCompanies.contactliste',compact('companie_liste'));
+
+
+
+
+
     }
 
 

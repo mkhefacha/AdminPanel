@@ -121,7 +121,7 @@ class User extends Authenticatable
 
     public function contactContacts()
     {
-        return $this->hasMany(ContactContact::class, 'company_id', 'id');
+        return $this->hasMany(ContactContact::class, 'user_id', 'id');
     }
 
 

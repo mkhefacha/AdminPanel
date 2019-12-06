@@ -29,7 +29,7 @@ class ListeCompany extends Model
 
     public function contactContacts()
     {
-        return $this->hasMany(ContactContact::class, 'company_id', 'id');
+        return $this->hasMany(ContactContact::class, 'liste_id', 'id');
     }
 
 }

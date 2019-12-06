@@ -13,13 +13,29 @@ class TestController extends Controller
 
 
 
-        public function index()
+        public function index(ContactContact $contactContact)
 
 
-        {       $listeCompanie=ListeCompany::find(1)->contactContacts;
+        {
 
 
-        return $listeCompanie ;
+
+
+            foreach($contactContact->user->contactContacts()->get() as $contact)
+            {
+
+                    dump($contact->contact_name);
+
+            }
+ print_r('----------------');
+            dump($contactContact->ListeCompanie->liste_name);
+
+
+
+
+
+
+        //return $listeCompanie ;
 
           //  $contactContacts=ContactContact::all();
 

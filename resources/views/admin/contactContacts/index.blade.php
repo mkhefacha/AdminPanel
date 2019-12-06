@@ -61,9 +61,7 @@
                             @if(auth()->user()->hasRole('Superadmin'))
                                 <tbody>
                                 @include('admin.contactContacts.adminformcontact')
-                                </tbody>
                             @else
-                                <tbody>
                                 @include('admin.contactContacts.userformcontact')
                                 </tbody>
                             @endif
