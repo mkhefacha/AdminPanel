@@ -40,7 +40,7 @@ class EventController extends Controller
     public function show(Event $event)
     {
         abort_if(Gate::denies('event_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
+        $this->authorize('view', $event);
         return view('admin.event.show', compact('event'));
     }
 
@@ -48,7 +48,7 @@ class EventController extends Controller
     public function edit(Event $event)
     {
         abort_if(Gate::denies('event_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
+        $this->authorize('update', $event);
         $companies = ContactCompany::all();
         $listes=ListeCompany::all();
 

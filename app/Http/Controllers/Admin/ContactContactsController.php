@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use Auth;
 use App\ContactCompany;
 use App\ContactContact;
 use App\Http\Controllers\Controller;
@@ -50,12 +50,17 @@ class ContactContactsController extends Controller
     {
         abort_if(Gate::denies('contact_contact_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-
-        $companies = ContactCompany::all();
-        $listes=ListeCompany::all();
-        $contactContact->load('company');
-        return view('admin.contactContacts.edit', compact('companies', 'contactContact','listes'));
-
+        if (auth()->user()->hasRole('Superadmin')  || (auth()->user()->company_id == $contactContact->company_id))
+        {
+            $companies = ContactCompany::all();
+            $listes=ListeCompany::all();
+            $contactContact->load('company');
+            return view('admin.contactContacts.edit', compact('companies', 'contactContact','listes'));
+        }
+        else
+        {
+            abort(404);
+        }
 
 
     }
@@ -71,9 +76,15 @@ class ContactContactsController extends Controller
     {
         abort_if(Gate::denies('contact_contact_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-
+        if (auth()->user()->hasRole('Superadmin')  || (auth()->user()->company_id == $contactContact->company_id))
+        {
             $contactContact->load('company');
             return view('admin.contactContacts.show', compact('contactContact'));
+        }
+           else
+               {
+             abort(404);
+           }
 
     }
 

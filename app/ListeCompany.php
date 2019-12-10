@@ -36,4 +36,6 @@ class ListeCompany extends Model
     {
         return $this->hasMany(Event::class, 'liste_id', 'id');
     }
+
+
 }

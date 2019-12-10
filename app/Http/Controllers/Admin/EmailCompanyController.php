@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\ContactCompany;
 use App\EmailCompany;
 use App\Http\Requests\EmailRequest;
@@ -42,9 +43,12 @@ class EmailCompanyController extends Controller
 
     public function show(EmailCompany $email_companie)
     {
-        abort_if(Gate::denies('email_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        return view('admin.emailCompany.show', compact('email_companie'));
-
+        if (auth()->user()->hasRole('Superadmin') || (auth()->user()->company_id == $email_companie->company_id)) {
+            abort_if(Gate::denies('email_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+            return view('admin.emailCompany.show', compact('email_companie'));
+        } else {
+            abort(404);
+        }
 
     }
 
@@ -52,14 +56,19 @@ class EmailCompanyController extends Controller
     public function edit(EmailCompany $email_companie)
     {
         abort_if(Gate::denies('email_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $companies = ContactCompany::all();
-        return view('admin.emailCompany.edit', compact('email_companie', 'companies'));
+        if (auth()->user()->hasRole('Superadmin') || (auth()->user()->company_id == $email_companie->company_id)) {
+            $companies = ContactCompany::all();
+            return view('admin.emailCompany.edit', compact('email_companie', 'companies'));
+        } else
+            {
+            abort(404);
+            }
     }
 
 
     public function update(EmailRequest $request, EmailCompany $email_companie)
     {
-       $email_companie->update( $request->all());
+        $email_companie->update($request->all());
         return redirect()->route('admin.email-companie.index');
     }
 

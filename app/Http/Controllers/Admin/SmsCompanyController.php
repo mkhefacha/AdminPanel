@@ -21,7 +21,7 @@ class SmsCompanyController extends Controller
         abort_if(Gate::denies('Sms_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $smsCompany = SmsCompany::all();
-        return view('admin.smsCompany.index',compact('smsCompany'));
+        return view('admin.smsCompany.index', compact('smsCompany'));
     }
 
 
@@ -31,7 +31,7 @@ class SmsCompanyController extends Controller
 
 
         $companies = ContactCompany::all();
-        return view('admin.SmsCompany.create',compact('companies','smsCompany'));
+        return view('admin.SmsCompany.create', compact('companies', 'smsCompany'));
     }
 
 
@@ -46,11 +46,14 @@ class SmsCompanyController extends Controller
 
     public function show(SmsCompany $sms_companie)
     {
+
         abort_if(Gate::denies('sms_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-
-        return view('admin.smsCompany.show',compact('sms_companie'));
-
+        if (auth()->user()->hasRole('Superadmin') || (auth()->user()->company_id == $sms_companie->company_id)) {
+            return view('admin.smsCompany.show', compact('sms_companie'));
+        }
+        else {
+            abort(404);
+        }
 
     }
 
@@ -58,8 +61,14 @@ class SmsCompanyController extends Controller
     public function edit(SmsCompany $sms_companie)
     {
         abort_if(Gate::denies('sms_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $companies = ContactCompany::all();
-        return view('admin.smsCompany.edit', compact('sms_companie', 'companies'));
+        if (auth()->user()->hasRole('Superadmin') || (auth()->user()->company_id == $sms_companie->company_id)) {
+            $companies = ContactCompany::all();
+            return view('admin.smsCompany.edit', compact('sms_companie', 'companies'));
+        } else {
+            abort(404);
+        }
+
+
     }
 
 

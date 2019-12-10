@@ -46,8 +46,10 @@ class ListeCompanyController extends Controller
 
     public function show(ListeCompany $companie_liste)
     {
+
         abort_if(Gate::denies('liste_company_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $this->authorize('view', $companie_liste);
 
              return view('admin.listeCompanies.show', compact('companie_liste'));
 
@@ -58,6 +60,8 @@ class ListeCompanyController extends Controller
     public function edit(ListeCompany $companie_liste)
     {
         abort_if(Gate::denies('liste_company_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $this->authorize('update', $companie_liste);
         $companies = ContactCompany::all();
 
         return view('admin.listeCompanies.edit', compact('companie_liste', 'companies'));
@@ -92,13 +96,10 @@ class ListeCompanyController extends Controller
     public function contactListe(ListeCompany $companie_liste)
 
     {
+
         abort_if(Gate::denies('liste_contact'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-
-
+        $this->authorize('view', $companie_liste);
                return view('admin.listeCompanies.contactliste',compact('companie_liste'));
-
-
 
 
 

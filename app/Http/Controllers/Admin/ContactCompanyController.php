@@ -46,21 +46,27 @@ class ContactCompanyController extends Controller
     {
         abort_if(Gate::denies('contact_company_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.contactCompanies.edit', compact('contactCompany'));
+        if (auth()->user()->hasRole('Superadmin') || (auth()->user()->company_id == $contactCompany->id))
+        {
+            return view('admin.contactCompanies.edit', compact('contactCompany'));
+        }
+        else{
+            abort(403);
+        }
+
+
     }
 
     public function update(UpdateContactCompanyRequest $request, ContactCompany $contactCompany)
     {
-
-        if ($contactCompany->status == "Inactive")
-        {
+        //  $this->authorize('update', $contactCompany);
+        if ($contactCompany->status == "Inactive") {
             User::ActiveUser($contactCompany->id)->update(['active' => 1]);
             $contactCompany->update($request->except('token'));
-        } else
-            {
+        } else {
             User::ActiveUser($contactCompany->id)->update(['active' => 0]);
             $contactCompany->update($request->except('token'));
-            }
+        }
 
         return redirect()->route('admin.contact-companies.index');
     }
@@ -69,11 +75,13 @@ class ContactCompanyController extends Controller
     public function show(ContactCompany $contactCompany)
     {
         abort_if(Gate::denies('contact_company_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        if (auth()->user()->hasRole('Superadmin') || (auth()->user()->company_id == $contactCompany->id)) {
+            return view('admin.contactCompanies.show', compact('contactCompany'));
 
-
-             return view('admin.contactCompanies.show', compact('contactCompany'));
-
-
+        }
+        else {
+            abort(404);
+        }
 
     }
 
@@ -97,7 +105,7 @@ class ContactCompanyController extends Controller
     public function history()
 
     {
-    abort_if(Gate::denies('contact_company_history'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('contact_company_history'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $contactCompanies = ContactCompany::onlyTrashed()->get();
 
         return view('admin.contactCompanies.history', compact('contactCompanies'));

@@ -1,4 +1,3 @@
-
 @foreach($smsCompany as $sms_companie)
 
     <tr data-entry-id="{{$sms_companie->id}}">
