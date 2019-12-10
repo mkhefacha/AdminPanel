@@ -17,6 +17,7 @@ class ContactCompanyController extends Controller
 {
     use ScopeUser;
 
+
     public function index()
     {
         abort_if(Gate::denies('contact_company_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -69,7 +70,11 @@ class ContactCompanyController extends Controller
     {
         abort_if(Gate::denies('contact_company_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.contactCompanies.show', compact('contactCompany'));
+
+             return view('admin.contactCompanies.show', compact('contactCompany'));
+
+
+
     }
 
     public function destroy(ContactCompany $contactCompany)

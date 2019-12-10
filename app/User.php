@@ -124,9 +124,21 @@ class User extends Authenticatable
         return $this->hasMany(ContactContact::class, 'user_id', 'id');
     }
 
+    public function emailcompanies()
+    {
+        return $this->hasMany(EmailCompany::class, 'user_id', 'id');
+    }
 
 
+    public function smscompanies()
+    {
+        return $this->hasMany(SmsCompany::class, 'user_id', 'id');
+    }
 
+    public function events()
+    {
+        return $this->hasMany(Event::class, 'user_id', 'id');
+    }
 
 
 }

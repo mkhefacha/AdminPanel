@@ -10,10 +10,13 @@ use App\Http\Controllers\Controller;
 use App\ListeCompany;
 use Gate;
 use App\User;
+use auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class ListeCompanyController extends Controller
 {
+
+
 
     public function index()
     {
@@ -44,7 +47,11 @@ class ListeCompanyController extends Controller
     public function show(ListeCompany $companie_liste)
     {
         abort_if(Gate::denies('liste_company_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        return view('admin.listeCompanies.show', compact('companie_liste'));
+
+
+             return view('admin.listeCompanies.show', compact('companie_liste'));
+
+
     }
 
 

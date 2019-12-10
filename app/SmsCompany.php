@@ -4,17 +4,19 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class ListeCompany extends Model
+
+class SmsCompany extends Model
 {
+
     use SoftDeletes;
-    public $table = 'liste_companies';
+    public $table = 'sms_companies';
     protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
-  protected $guarded=[];
+    protected $guarded=[];
 
 
     public function company()
@@ -27,13 +29,4 @@ class ListeCompany extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function contactContacts()
-    {
-        return $this->hasMany(ContactContact::class, 'liste_id', 'id');
-    }
-
-    public function events()
-    {
-        return $this->hasMany(Event::class, 'liste_id', 'id');
-    }
 }

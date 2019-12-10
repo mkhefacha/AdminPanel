@@ -1,7 +1,10 @@
 <?php
+
 namespace App;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
 class ContactCompany extends Model
 {
     use SoftDeletes;
@@ -52,6 +55,20 @@ class ContactCompany extends Model
     public function listeCompanies()
     {
         return $this->hasMany(ListeCompany::class, 'company_id', 'id');
+    }
+
+    public function emailcompanies()
+    {
+        return $this->hasMany(EmailCompany::class, 'company_id', 'id');
+    }
+
+    public function smscompanies()
+    {
+        return $this->hasMany(SmsCompany::class, 'company_id', 'id');
+    }
+    public function events()
+    {
+        return $this->hasMany(Event::class, 'company_id', 'id');
     }
 
 }

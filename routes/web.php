@@ -44,11 +44,24 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
      //Liste Companies
     Route::delete('companie-liste/destroy', 'ListeCompanyController@massDestroy')->name('companie-liste.massDestroy');
-    Route::resource('companie-liste', 'ListeCompanyController');
     Route::get('companie-liste/{companie_liste}/liste-contact', 'ListeCompanyController@contactListe')->name('liste-contact');
+    Route::resource('companie-liste', 'ListeCompanyController');
+
+
+    //sms_companies
+    Route::delete('sms-companie/destroy', 'SmsCompanyController@massDestroy')->name('sms-companie.massDestroy');
+    Route::resource('sms-companie', 'SmsCompanyController');
+
+    //email_companies
+    Route::delete('email-companie/destroy', 'EmailCompanyController@massDestroy')->name('email-companie.massDestroy');
+    Route::resource('email-companie','EmailCompanyController');
+
+    //event
+    Route::delete('event/destroy', 'EventController@massDestroy')->name('event.massDestroy');
+    Route::resource('event','EventController');
 
 });
 
 
 //test
-Route::get('/test/{contactContact}', 'TestController@index');
+Route::get('/test', 'TestController@index');

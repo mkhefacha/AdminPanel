@@ -62,7 +62,7 @@
                                         Status
                                     </th>
                                     <td>
-                                        @if($user->active==1)<span class="label label-success">Active</span>
+                                        @if($user->active=='Active')<span class="label label-success">Active</span>
                                         @else
                                             <span class="label label-danger">Inactive</span>
                                         @endif

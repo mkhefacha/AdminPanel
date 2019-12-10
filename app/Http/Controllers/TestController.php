@@ -13,7 +13,7 @@ class TestController extends Controller
 
 
 
-        public function index(ContactContact $contactContact)
+        public function index()
 
 
         {
@@ -21,16 +21,9 @@ class TestController extends Controller
 
 
 
-            foreach($contactContact->user->contactContacts()->get() as $contact)
-            {
+            return auth()->id();
 
-                    dump($contact->contact_name);
-
-            }
- print_r('----------------');
-            dump($contactContact->ListeCompanie->liste_name);
-
-
+           //return $request;
 
 
 

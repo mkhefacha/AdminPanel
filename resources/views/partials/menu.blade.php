@@ -79,6 +79,7 @@
                                     <a href="{{ route("admin.companie-liste.index") }}">
                                         <i class="fas fa-list"></i>
 
+
                                         <span>{{ trans('cruds.companieliste.title') }}</span>
                                     </a>
                                 </li>
@@ -108,6 +109,52 @@
                                 </li>
                             @endcan
 
+
+                    </ul>
+                </li>
+            @endcan
+
+            @can('event_access')
+                <li class="treeview">
+                    <a href="#">
+                        <i class="far fa-calendar-alt"></i>
+
+                        </i>
+                        <span>Evénement</span>
+                        <span class="pull-right-container"><i class="fa fa-fw fa-angle-left pull-right"></i></span>
+                    </a>
+
+
+                    <ul class="treeview-menu">
+                        @can('Sms_access')
+                            <li class="{{ request()->is('admin/sms-companie') || request()->is('admin/sms-companie/*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.sms-companie.index") }}">
+                                    <i class="fas fa-mobile-alt"></i>
+
+                                    </i>
+                                    <span>SmS</span>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('Email_access')
+                                <li class="{{ request()->is('admin/email-companie') || request()->is('admin/email-companie/*') ? 'active' : '' }}">
+                                    <a href="{{ route("admin.email-companie.index") }}">
+                                    <i class="fas fa-envelope"></i>
+
+                                    <span>Email</span>
+                                </a>
+                            </li>
+                        @endcan
+
+                            @can('event_access')
+                                <li class="{{ request()->is('admin/event') || request()->is('admin/event/*') ? 'active' : '' }}">
+                                    <a href="{{ route("admin.event.index") }}">
+                                        <i class="fa fa-calendar-o"></i>
+
+                                        <span>Event</span>
+                                    </a>
+                                </li>
+                            @endcan
 
                     </ul>
                 </li>

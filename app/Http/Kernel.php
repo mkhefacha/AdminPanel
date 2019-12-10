@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheeckListe;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -32,6 +33,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\ Cheeckeduser::class,
 
 
+
         ],
     ];
 
@@ -44,5 +46,8 @@ class Kernel extends HttpKernel
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'bindings'      => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'auth.basic'    => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'CheeckListe'  =>CheeckListe::class
+
+
     ];
 }

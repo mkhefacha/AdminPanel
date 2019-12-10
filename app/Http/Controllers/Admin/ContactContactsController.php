@@ -15,6 +15,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ContactContactsController extends Controller
 {
+
+
     public function index()
     {
         abort_if(Gate::denies('contact_contact_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -48,12 +50,14 @@ class ContactContactsController extends Controller
     {
         abort_if(Gate::denies('contact_contact_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+
         $companies = ContactCompany::all();
         $listes=ListeCompany::all();
-
         $contactContact->load('company');
-
         return view('admin.contactContacts.edit', compact('companies', 'contactContact','listes'));
+
+
+
     }
 
     public function update(UpdateContactContactRequest $request, ContactContact $contactContact)
@@ -67,9 +71,10 @@ class ContactContactsController extends Controller
     {
         abort_if(Gate::denies('contact_contact_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $contactContact->load('company');
 
-        return view('admin.contactContacts.show', compact('contactContact'));
+            $contactContact->load('company');
+            return view('admin.contactContacts.show', compact('contactContact'));
+
     }
 
     public function destroy(ContactContact $contactContact)

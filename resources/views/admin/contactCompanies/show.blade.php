@@ -76,7 +76,7 @@
                                         Status
                                     </th>
                                     <td>
-                                        @if($contactCompany->status==1)<span class="label label-success">Active</span>
+                                        @if($contactCompany->status=='Active')<span class="label label-success">Active</span>
                                         @else
                                             <span class="label label-danger">Inactive</span>
                                         @endif
