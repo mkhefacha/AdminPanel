@@ -127,8 +127,8 @@
 
                     <ul class="treeview-menu">
                         @can('Sms_access')
-                            <li class="{{ request()->is('admin/sms-companie') || request()->is('admin/sms-companie/*') ? 'active' : '' }}">
-                                <a href="{{ route("admin.sms-companie.index") }}">
+                            <li class="{{ request()->is('admin/sms-company') || request()->is('admin/sms-company/*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.sms-company.index") }}">
                                     <i class="fas fa-mobile-alt"></i>
 
                                     </i>

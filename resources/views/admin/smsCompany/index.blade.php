@@ -4,7 +4,7 @@
         @can('sms_create')
             <div style="margin-bottom: 10px;" class="row">
                 <div class="col-lg-12">
-                    <a class="btn btn-success" href="{{ route("admin.sms-companie.create") }}">
+                    <a class="btn btn-success" href="{{ route("admin.sms-company.create") }}">
                         Ajouter Sms
                     </a>
                 </div>
@@ -80,7 +80,7 @@
             let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
             let deleteButton = {
                 text: deleteButtonTrans,
-                url: "{{ route('admin.sms-companie.massDestroy') }}",
+                url: "{{ route('admin.sms-company.massDestroy') }}",
                 className: 'btn-danger',
                 action: function (e, dt, node, config) {
                     var ids = $.map(dt.rows({selected: true}).nodes(), function (entry) {

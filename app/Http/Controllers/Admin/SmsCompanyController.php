@@ -7,6 +7,7 @@ use App\Http\Requests\SmsFormeRequest;
 use App\SmsCompany;
 use App\ListeCompany;
 use App\ContactCompany;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Gate;
@@ -39,52 +40,47 @@ class SmsCompanyController extends Controller
 
     {
         $request->persist();
-        return redirect()->route('admin.sms-companie.index');
+        return redirect()->route('admin.sms-company.index');
 
     }
 
 
-    public function show(SmsCompany $sms_companie)
+    public function show(SmsCompany $smsCompany)
     {
 
         abort_if(Gate::denies('sms_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        if (auth()->user()->hasRole('Superadmin') || (auth()->user()->company_id == $sms_companie->company_id)) {
-            return view('admin.smsCompany.show', compact('sms_companie'));
-        }
-        else {
-            abort(404);
-        }
+        $this->authorize('view', $smsCompany);
+
+        return view('admin.smsCompany.show', compact('smsCompany'));
+
 
     }
 
 
-    public function edit(SmsCompany $sms_companie)
+    public function edit(SmsCompany $smsCompany)
     {
         abort_if(Gate::denies('sms_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        if (auth()->user()->hasRole('Superadmin') || (auth()->user()->company_id == $sms_companie->company_id)) {
-            $companies = ContactCompany::all();
-            return view('admin.smsCompany.edit', compact('sms_companie', 'companies'));
-        } else {
-            abort(404);
-        }
+        $this->authorize('update', $smsCompany);
+        $companies = ContactCompany::all();
+        return view('admin.smsCompany.edit', compact('smsCompany', 'companies'));
 
 
     }
 
 
-    public function update(SmsFormeRequest $request, SmsCompany $sms_companie)
+    public function update(SmsFormeRequest $request, SmsCompany $smsCompany)
     {
-        $sms_companie->update($request->all());
+        $smsCompany->update($request->all());
 
-        return redirect()->route('admin.sms-companie.index');
+        return redirect()->route('admin.sms-company.index');
     }
 
 
-    public function destroy(SmsCompany $sms_companie)
+    public function destroy(SmsCompany $smsCompany)
     {
         abort_if(Gate::denies('sms_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $sms_companie->delete();
-        return redirect()->route('admin.sms-companie.index');
+        $smsCompany->delete();
+        return redirect()->route('admin.sms-company.index');
 
     }
 

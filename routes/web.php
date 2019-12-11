@@ -1,6 +1,6 @@
 <?php
 
-/*Route::redirect('/', '/login');
+Route::redirect('/', '/login');
 Route::get('/home', function () {
     if (session('status')) {
         return redirect()->route('admin.home')->with('status', session('status'));
@@ -49,8 +49,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
 
     //sms_companies
-    Route::delete('sms-companie/destroy', 'SmsCompanyController@massDestroy')->name('sms-companie.massDestroy');
-    Route::resource('sms-companie', 'SmsCompanyController');
+    Route::delete('sms-company/destroy', 'SmsCompanyController@massDestroy')->name('sms-company.massDestroy');
+    Route::resource('sms-company', 'SmsCompanyController');
 
     //email_companies
     Route::delete('email-companie/destroy', 'EmailCompanyController@massDestroy')->name('email-companie.massDestroy');

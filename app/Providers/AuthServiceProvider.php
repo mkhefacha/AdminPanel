@@ -2,6 +2,17 @@
 
 namespace App\Providers;
 
+use App\ContactCompany;
+use App\ContactContact;
+use App\EmailCompany;
+use App\Event;
+use App\Policies\CompanyPolicy;
+use App\Policies\ContactPolicy;
+use App\Policies\EmailPolicy;
+use App\Policies\EventPolicy;
+use App\Policies\listePolicy;
+use App\Policies\SmsPolicy;
+use App\SmsCompany;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Passport\Passport;
@@ -14,7 +25,13 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\ListeCompany' => 'App\Policies\ListePolicy',
+        'App\Model' => 'App\Policies\Model',
+         ListeCompany::class=>listePolicy::class,
+         Event::class=>EventPolicy::class,
+         SmsCompany::class=>SmsPolicy::class,
+         ContactCompany::class=>CompanyPolicy::class,
+         ContactContact::class=>ContactPolicy::class,
+         EmailCompany::class=>EmailPolicy::class
     ];
 
     /**

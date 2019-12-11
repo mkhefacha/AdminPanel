@@ -11,7 +11,7 @@
                     </div>
                     <div class="panel-body">
 
-                        <form action="{{route('admin.sms-companie.store')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('admin.sms-company.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group {{ $errors->has('name_sms') ? 'has-error' : '' }}">

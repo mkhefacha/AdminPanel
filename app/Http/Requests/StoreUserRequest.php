@@ -22,6 +22,9 @@ class StoreUserRequest extends FormRequest
             'name'     => [
                 'required',
             ],
+            'company_id'    => [
+                'required',
+            ],
             'email'    => [
                 'required',
                 'unique:users',
@@ -37,7 +40,6 @@ class StoreUserRequest extends FormRequest
             ],
             'roles'    => [
                 'required',
-                'array',
             ],
         ];
     }

@@ -46,20 +46,17 @@ class ContactCompanyController extends Controller
     {
         abort_if(Gate::denies('contact_company_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        if (auth()->user()->hasRole('Superadmin') || (auth()->user()->company_id == $contactCompany->id))
-        {
+        $this->authorize('update', $contactCompany);
+
             return view('admin.contactCompanies.edit', compact('contactCompany'));
-        }
-        else{
-            abort(403);
-        }
+
 
 
     }
 
     public function update(UpdateContactCompanyRequest $request, ContactCompany $contactCompany)
     {
-        //  $this->authorize('update', $contactCompany);
+
         if ($contactCompany->status == "Inactive") {
             User::ActiveUser($contactCompany->id)->update(['active' => 1]);
             $contactCompany->update($request->except('token'));
@@ -75,14 +72,9 @@ class ContactCompanyController extends Controller
     public function show(ContactCompany $contactCompany)
     {
         abort_if(Gate::denies('contact_company_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        if (auth()->user()->hasRole('Superadmin') || (auth()->user()->company_id == $contactCompany->id)) {
+
+        $this->authorize('view', $contactCompany);
             return view('admin.contactCompanies.show', compact('contactCompany'));
-
-        }
-        else {
-            abort(404);
-        }
-
     }
 
     public function destroy(ContactCompany $contactCompany)

@@ -46,7 +46,6 @@ class ListeCompanyController extends Controller
 
     public function show(ListeCompany $companie_liste)
     {
-
         abort_if(Gate::denies('liste_company_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $this->authorize('view', $companie_liste);

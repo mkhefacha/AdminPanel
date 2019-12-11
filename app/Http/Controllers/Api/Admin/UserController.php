@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\ContactCompany;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\User;
@@ -17,41 +19,51 @@ class UserController extends Controller
     public function index()
     {
 
-      return  UserCollection::collection(User::all());
+        abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return new UserResource(User::with(['roles'])->get());
+
+       // UserResource::collection
 
     }
 
-    public function create()
+
+    public function store(StoreUserRequest $request)
     {
-
-    }
-
-
-    public function store(Request $request)
-    {
-
+        $user= User::create($request->all());
+        $user->roles()->sync($request->input('roles', []));
+        return (new UserResource($user))
+            ->response()
+            ->setStatusCode(Response::HTTP_ACCEPTED);
     }
 
 
     public function show(User $user)
     {
-        return new UserResource($user);
+        abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return new UserResource($user->load(['roles']));
     }
 
 
-    public function edit(User $user)
+
+
+    public function update(UpdateUserRequest $request, User $user)
     {
+        $user->update($request->all());
+        $user->roles()->sync($request->input('roles', []));
 
-    }
-
-
-    public function update(Request $request, User $user)
-    {
-
+        return (new UserResource($user))
+            ->response()
+            ->setStatusCode(Response::HTTP_ACCEPTED);
     }
 
     public function destroy(User $user)
     {
-        //
+        abort_if(Gate::denies('user_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $user->delete();
+
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }

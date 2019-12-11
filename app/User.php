@@ -81,6 +81,23 @@ class User extends Authenticatable
         $this->notify(new ResetPassword($token));
     }
 
+    public function hasRole($role)
+    {
+
+        if ($this->roles()->where('title', $role)->first()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function scopeActiveUser($query, $field)
+    {
+        return $query->where('company_id', $field);
+
+    }
+
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);
@@ -89,28 +106,6 @@ class User extends Authenticatable
     public function company()
     {
         return $this->belongsTo(ContactCompany::class, 'company_id');
-    }
-
-    public function scopeActiveUser($query, $field)
-    {
-        return $query->where('company_id', $field);
-
-
-    }
-
-
-
-    public function hasRole($role)
-    {
-
-        if ($this->roles()->where('title', $role)->first())
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 
 
@@ -139,7 +134,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Event::class, 'user_id', 'id');
     }
-
 
 
 }

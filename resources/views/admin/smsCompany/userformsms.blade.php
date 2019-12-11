@@ -24,19 +24,19 @@
 
         <td>
             @can('sms_show')
-                <a class="btn btn-xs btn-primary" href="{{route('admin.sms-companie.show',$sms_companie->id)}}">
+                <a class="btn btn-xs btn-primary" href="{{route('admin.sms-company.show',$sms_companie->id)}}">
                     {{ trans('global.view') }}
                 </a>
             @endcan
 
             @can('sms_edit')
-                <a class="btn btn-xs btn-info" href="{{route('admin.sms-companie.edit',$sms_companie->id)}}">
+                <a class="btn btn-xs btn-info" href="{{route('admin.sms-company.edit',$sms_companie->id)}}">
                     {{ trans('global.edit') }}
                 </a>
             @endcan
 
             @can('sms_delete')
-                <form action="{{route('admin.sms-companie.destroy',$sms_companie->id)}}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                <form action="{{route('admin.sms-company.destroy',$sms_companie->id)}}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">

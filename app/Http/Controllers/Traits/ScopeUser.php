@@ -26,19 +26,8 @@ trait ScopeUser
     }
 
 
-    public function autorize(ListeCompany $companie_liste)
-    {
-        if((auth()->user()->hasRole('Superadmin')) || (auth()->user()->company_id==$companie_liste->company_id) )
-        {
-            return true;
-        }
-        else
-        {
-            abort(404);
 
-        }
 
-    }
 
 
 }

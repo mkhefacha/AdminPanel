@@ -19,7 +19,7 @@
                                         Sms Id
                                     </th>
                                     <td>
-                                        {{$sms_companie->id}}
+                                        {{$smsCompany->id}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -27,7 +27,7 @@
                                         Sms Name
                                     </th>
                                     <td>
-                                        {{$sms_companie->name_sms}}
+                                        {{$smsCompany->name_sms}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -35,7 +35,7 @@
                                         Companies
                                     </th>
                                     <td>
-                                        {{$sms_companie->company->company_name ?? ''}}
+                                        {{$smsCompany->company->company_name ?? ''}}
                                     </td>
                                 </tr>
 
@@ -44,7 +44,7 @@
                                         Message
                                     </th>
                                     <td>
-                                        {{$sms_companie->message_sms}}
+                                        {{$smsCompany->message_sms}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -52,7 +52,7 @@
                                         creer par:
                                     </th>
                                     <td>
-                                        {{$sms_companie->creer_sms}}
+                                        {{$smsCompany->creer_sms}}
                                     </td>
                                 </tr>
 
