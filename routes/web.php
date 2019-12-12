@@ -39,7 +39,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('contact-companies', 'ContactCompanyController');
 
     // Contact Contacts
+
     Route::delete('contact-contacts/destroy', 'ContactContactsController@massDestroy')->name('contact-contacts.massDestroy');
+    Route::post('contact-contacts/import', 'ContactContactsController@csv_import')->name('contact-contacts.import');
     Route::resource('contact-contacts', 'ContactContactsController');
 
      //Liste Companies

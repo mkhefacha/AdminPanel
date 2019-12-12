@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
+use App\Http\Requests\ImportRequest;
+use App\Imports\ContactImport;
 use Auth;
 use App\ContactCompany;
 use App\ContactContact;
@@ -11,6 +14,7 @@ use App\Http\Requests\UpdateContactContactRequest;
 use App\ListeCompany;
 use Gate;
 use Illuminate\Http\Request;
+use Excel;
 use Symfony\Component\HttpFoundation\Response;
 
 class ContactContactsController extends Controller
@@ -32,9 +36,9 @@ class ContactContactsController extends Controller
 
 
         $companies = ContactCompany::all();
-        $listes=ListeCompany::all();
+        $listes = ListeCompany::all();
 
-        return view('admin.contactContacts.create', compact('companies','listes'));
+        return view('admin.contactContacts.create', compact('companies', 'listes'));
     }
 
     public function store(StoreContactContactRequest $request)
@@ -45,16 +49,23 @@ class ContactContactsController extends Controller
     }
 
 
-
     public function edit(ContactContact $contactContact)
     {
         abort_if(Gate::denies('contact_contact_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $this->authorize('update', $contactContact);
+      $this->authorize('update', $contactContact);
+
+        if((auth()->user()->hasRole('Superadmin'))||(auth()->id()==$contactContact->user_id)||(auth()->user()->hasRole('Admin')))
+        {
             $companies = ContactCompany::all();
-            $listes=ListeCompany::all();
+            $listes = ListeCompany::all();
             $contactContact->load('company');
-            return view('admin.contactContacts.edit', compact('companies', 'contactContact','listes'));
+            return view('admin.contactContacts.edit', compact('companies', 'contactContact', 'listes'));
+        }
+        else
+        {
+            abort(403);
+        }
 
 
 
@@ -70,10 +81,10 @@ class ContactContactsController extends Controller
     public function show(ContactContact $contactContact)
     {
         abort_if(Gate::denies('contact_contact_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $this->authorize('view',$contactContact);
+       $this->authorize('view', $contactContact);
 
-            $contactContact->load('company');
-
+        $contactContact->load('company');
+        return view('admin.contactContacts.show', compact('contactContact'));
 
     }
 
@@ -92,4 +103,13 @@ class ContactContactsController extends Controller
 
         return response(null, Response::HTTP_NO_CONTENT);
     }
+
+    public function csv_import(ImportRequest $request)
+    {
+
+        Excel::import(new ContactImport(), $request->file('file'));
+
+        return back();
+    }
+
 }
