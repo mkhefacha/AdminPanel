@@ -21,12 +21,7 @@
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <form action="{{ route('admin.contact-contacts.import') }}" method="POST"
-                              enctype="multipart/form-data">
-                            @csrf
-                            <input type="file" name="file">
-                            <button class="btn btn-primary">Import Contact</button>
-                        </form>
+                       Contact
                     </div>
                     <div class="panel-body">
 

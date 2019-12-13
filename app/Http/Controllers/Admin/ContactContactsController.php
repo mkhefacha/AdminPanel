@@ -43,7 +43,14 @@ class ContactContactsController extends Controller
 
     public function store(StoreContactContactRequest $request)
     {
-        $request->persist();
+        if (request()->hasFile('file'))
+        {
+            Excel::import(new ContactImport(), Request()->file('file'));
+        }
+      else
+          {
+          $request->persist();
+         }
 
         return redirect()->route('admin.contact-contacts.index');
     }
@@ -104,12 +111,11 @@ class ContactContactsController extends Controller
         return response(null, Response::HTTP_NO_CONTENT);
     }
 
-    public function csv_import(ImportRequest $request)
+   /* public function csv_import(ImportRequest $request)
     {
 
-        Excel::import(new ContactImport(), $request->file('file'));
 
-        return back();
-    }
+        return redirect()->route('admin.contact-contacts.index');
+    }*/
 
 }

@@ -127,13 +127,15 @@
                                 {{ trans('cruds.contactContact.fields.contact_email_helper') }}
                             </p>
                         </div>
+                        <div class="form-group">
+                            <label for="contact_email">Import Contact</label>
+                            <input type="file" name="file">
 
-
+                        </div>
                         <div>
                             <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
                         </div>
                     </form>
-
 
                 </div>
             </div>

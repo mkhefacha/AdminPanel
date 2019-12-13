@@ -21,7 +21,8 @@ class ContactImport implements ToModel, WithBatchInserts, WithChunkReading
             'contact_phone_1'=>$row[1],
             'contact_phone_2'=>$row[2],
             'contact_email'=>$row[3],
-            'company_id' =>auth()->user()->company_id,
+            'company_id' =>request('company_id'),
+            'liste_id'=>request('liste_id'),
             'user_id' =>auth()->id(),
             'contact_creer'=>auth()->user()->name,
 
