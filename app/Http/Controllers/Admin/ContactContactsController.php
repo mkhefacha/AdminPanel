@@ -111,11 +111,5 @@ class ContactContactsController extends Controller
         return response(null, Response::HTTP_NO_CONTENT);
     }
 
-   /* public function csv_import(ImportRequest $request)
-    {
-
-
-        return redirect()->route('admin.contact-contacts.index');
-    }*/
 
 }

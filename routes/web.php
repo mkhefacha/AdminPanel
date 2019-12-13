@@ -41,12 +41,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Contact Contacts
 
     Route::delete('contact-contacts/destroy', 'ContactContactsController@massDestroy')->name('contact-contacts.massDestroy');
-    //Route::post('contact-contacts/import', 'ContactContactsController@csv_import')->name('contact-contacts.import');
     Route::resource('contact-contacts', 'ContactContactsController');
 
      //Liste Companies
     Route::delete('companie-liste/destroy', 'ListeCompanyController@massDestroy')->name('companie-liste.massDestroy');
-    Route::get('companie-liste/{companie_liste}/liste-contact', 'ListeCompanyController@contactListe')->name('liste-contact');
+
     Route::resource('companie-liste', 'ListeCompanyController');
 
 

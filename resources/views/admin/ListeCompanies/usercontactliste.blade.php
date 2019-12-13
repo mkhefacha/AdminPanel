@@ -39,19 +39,19 @@
                     </a>
                 @endcan
 
-                    @can('contact_contact_edit')
-                        <a class="btn btn-xs btn-info" href="{{ route('admin.contact-contacts.edit', $contactContact->id) }}">
-                            {{ trans('global.edit') }}
-                        </a>
-                    @endcan
+                @can('envoyer_sms')
+                    <a class="btn btn-xs btn-info" href="#">
+                        Envoyer SMS
+                    </a>
+                @endcan
 
-                    @can('contact_contact_delete')
-                        <form action="{{ route('admin.contact-contacts.destroy', $contactContact->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                        </form>
-                    @endcan
+                @can('envoyer_email')
+                    <a class="btn btn-xs btn-danger" href="#">
+                        Envoyer Email
+                    </a>
+                @endcan
+
+            </td>
 
             </td>
 
