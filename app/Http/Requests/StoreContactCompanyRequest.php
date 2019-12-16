@@ -21,7 +21,8 @@ class StoreContactCompanyRequest extends FormRequest
         return [
 
             'company_name'=> 'required|unique:contact_companies',
-            'status'=>'required'
+            'status'=>'required',
+
         ];
     }
     public function messages()

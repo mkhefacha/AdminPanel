@@ -1,15 +1,3 @@
-@extends('layouts.admin')
-@section('content')
-    <div class="content">
-
-        <div class="row">
-            <div class="col-lg-12">
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                       creer liste
-                    </div>
-                    <div class="panel-body">
 
                         <form action="{{route('admin.companie-liste.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
@@ -30,11 +18,11 @@
                              @if(auth()->user()->hasRole('Superadmin'))
                             <div class="form-group ">
                                 <label for="company">{{ trans('cruds.contactContact.fields.company') }}*</label>
-                               <select name="company_id" id="company" class="form-control select2" required>
+                               <select name="company_id" id="company" class="form-control" required>
                                     <option value="sélectionner"  disabled >Select companies</option>
                                     @foreach($companies as $company)
                                         @if($company->status=="Active")
-                                            <option value="{{ $company->id }}"{{$listeCompany->company_id == $company->id ?'selected' : ''}}>{{$company->company_name}}</option>
+                                            <option value="{{ $company->id }}">{{$company->company_name}}</option>
                                         @endif
                                     @endforeach
                                 </select>
@@ -47,7 +35,8 @@
                             @else
                                 <div class="form-group">
                                     <label for="name">{{ trans('cruds.contactContact.fields.company') }}*</label>
-                                    <select name="company_id" id="company" class="form-control select2">
+                                    <select name="company_id" id="company" class="form-control" >
+                                        <option value="sélectionner"  disabled >Select companies</option>
                                     @foreach ( $companies as $company)
                                         @if(auth()->user()->company_id == $company->id)
                                                 <option value="{{ $company->id }}">{{ $company->company_name }}</option>
@@ -56,17 +45,10 @@
                                     </select>
                                 </div>
                          @endif
+                        <br>
 
                             <div>
                                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
                             </div>
                         </form>
 
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-@endsection

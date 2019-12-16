@@ -20,7 +20,7 @@ class listePolicy
 
     public function viewAny(User $user)
     {
-        //
+
     }
 
 

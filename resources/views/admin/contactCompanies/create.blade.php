@@ -51,7 +51,7 @@
                         </div>
                         <div class="form-group {{ $errors->has('company_email') ? 'has-error' : '' }}">
                             <label for="company_email">{{ trans('cruds.contactCompany.fields.company_email') }}</label>
-                            <input type="text" id="company_email" name="company_email" class="form-control" value="{{ old('company_email', isset($contactCompany) ? $contactCompany->company_email : '') }}">
+                            <input type="email" id="company_email" name="company_email" class="form-control" value="{{ old('company_email', isset($contactCompany) ? $contactCompany->company_email : '') }}">
                             @if($errors->has('company_email'))
                                 <p class="help-block">
                                     {{ $errors->first('company_email') }}

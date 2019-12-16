@@ -4,12 +4,31 @@
         @can('liste_company_create')
             <div style="margin-bottom: 10px;" class="row">
                 <div class="col-lg-12">
-                    <a class="btn btn-success" href="{{ route("admin.companie-liste.create") }}">
-                        Ajouter Liste
-                    </a>
+
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#yourModal">
+                        ajouter liste
+                    </button>
+
+                        <div class="modal fade" id="yourModal" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">ajouter liste</h4>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        @include('admin.ListeCompanies.create')
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                 </div>
-            </div>
         @endcan
+
         <div class="row">
             <div class="col-lg-12">
 

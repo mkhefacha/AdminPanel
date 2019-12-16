@@ -21,9 +21,9 @@ class ListeCompanyController extends Controller
     public function index()
     {
         abort_if(Gate::denies('liste_company_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
+        $companies = ContactCompany::all();
         $listecopmpany = ListeCompany::all();
-        return view('admin.listeCompanies.index', compact('listecopmpany'));
+        return view('admin.listeCompanies.index', compact('listecopmpany','companies'));
     }
 
 
@@ -41,7 +41,8 @@ class ListeCompanyController extends Controller
     {
         $request->persist();
 
-        return redirect()->route('admin.companie-liste.index');
+
+        return redirect()->route('admin.companie-liste.index')->with('status', 'Profile updated!');;
     }
 
     public function show(ListeCompany $companie_liste)
