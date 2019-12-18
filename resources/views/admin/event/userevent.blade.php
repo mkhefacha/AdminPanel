@@ -6,10 +6,6 @@
         </td>
 
         <td>
-            {{ $events->id ?? '' }}
-        </td>
-
-        <td>
             {{ $events->event_name ?? '' }}
         </td>
         <td>
@@ -18,11 +14,19 @@
         <td>
             {{ $events->ListeCompanie->liste_name ?? ''}}
         </td>
+
         <td>
             {{ $events->date_lanch ?? '' }}
+        </td>
+
         <td>
             {{ $events->creer ?? '' }}
         </td>
+
+        <td>
+            event type
+        </td>
+
         <td>
             {{ucwords($events->created_at->formatlocalized('%d %b %G'))}}
         </td>

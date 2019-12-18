@@ -7,7 +7,7 @@
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                     Ajouter Event
+                        Ajouter Event
                     </div>
                     <div class="panel-body">
 
@@ -28,6 +28,7 @@
                                 </p>
                             </div>
 
+
                             <div class="form-group {{ $errors->has('date_lanch') ? 'has-error' : '' }}">
                                 <label for="contact_phone_1">date de lancement</label>
                                 <input type="date" id="date_lanch" name="date_lanch" class="form-control">
@@ -42,12 +43,11 @@
                             </div>
 
 
-
                             @if(auth()->user()->hasRole('Superadmin'))
                                 <div class="form-group ">
                                     <label for="company">{{ trans('cruds.contactContact.fields.company') }}*</label>
-                                    <select name="company_id" id="company" class="form-control select2" required>
-                                        <option value="sélectionner"  disabled >Select companies</option>
+                                    <select name="company_id" id="company_id" class="form-control" required>
+                                        <option value="sélectionner" disabled>Select companies</option>
                                         @foreach($companies as $company)
                                             @if($company->status=="Active")
                                                 <option value="{{ $company->id }}">{{$company->company_name}}</option>
@@ -63,8 +63,8 @@
 
                                 <div class="form-group {{ $errors->has('liste_id') ? 'has-error' : '' }}">
                                     <label for="liste">liste*</label>
-                                    <select name="liste_id" id="liste" class="form-control select2" required>
-                                        <option value="sélectionner"  disabled >Select listes</option>
+                                    <select name="liste_id" id="liste" class="form-control " required>
+                                        <option value="sélectionner" disabled>Select listes</option>
                                         @foreach($listes as $liste)
                                             <option value="{{ $liste->id }}">{{ $liste->liste_name }}</option>
                                         @endforeach
@@ -79,7 +79,7 @@
 
                                 <div class="form-group">
                                     <label for="name">{{ trans('cruds.contactContact.fields.company') }}*</label>
-                                    <select name="company_id" id="company" class="form-control select2">
+                                    <select name="company_id" id="company_id" class="form-control ">
                                         @foreach ( $companies as $company)
                                             @if(auth()->user()->company_id == $company->id)
                                                 <option value="{{ $company->id }}">{{ $company->company_name }}</option>
@@ -87,10 +87,11 @@
                                         @endforeach
                                     </select>
                                 </div>
+
                                 <div class="form-group {{ $errors->has('liste_id') ? 'has-error' : '' }}">
                                     <label for="liste">liste*</label>
-                                    <select name="liste_id" id="liste" class="form-control select2" required>
-                                        <option value="sélectionner"  disabled >Select listes</option>
+                                    <select name="liste_id" id="liste" class="form-control " required>
+                                        <option value="sélectionner" disabled>Select listes</option>
                                         @foreach($listes as $liste)
                                             @if(auth()->user()->company_id== $liste->company_id)
                                                 <option value="{{ $liste->id }}">{{ $liste->liste_name }}</option>
@@ -105,19 +106,35 @@
                                 </div>
                             @endif
 
-                            <div class="form-group">
-                                <label for="status">Status*</label>
-                                <select name="status" id="status" class="form-control">
-                                    <option value="" disabled>Select Status</option>
-                                    <option value="1">deja lancé</option>
-                                    <option value="0">en attente</option>
-                                </select>
-                            </div> <br>
+
+                            <div class="form-row">
+
+                                <div class="form-group col-md-4">
+                                    <input type="radio" id="smsradio" name="radiocheck">
+                                    <label for="inputState">Sms</label>
+                                    <select name="sms-list" id="sms-list" class="form-control">
+                                        <option label="choisir votre sms..." disabled></option>
+                                    </select>
+                                </div>
 
 
-                            <div>
-                                <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
+                                <div class="form-group col-md-4">
+                                    <input type="radio" id="emailradio" name="radiocheck">
+                                    <label for="inputState">Email</label>
+                                    <select name="email-list" id="email-list" class="form-control">
+                                        <option label="choisir votre email..." disabled></option>
+                                    </select>
+                                </div>
                             </div>
+
+
+                            <div class="form-group row">
+                                <div class="col-sm-10">
+                                    <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
+                                </div>
+                            </div>
+
+
                         </form>
 
 
@@ -128,3 +145,62 @@
         </div>
     </div>
 @endsection
+
+
+
+@section('scripts')
+    <script>
+        var company_id;
+        $(document).ready(function () {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('#company_id').click(function () {
+                company_id = $(this).val();
+            })
+
+            $('#smsradio').change(function () {
+                if ($(this).is(":checked"))
+                {
+                    $.ajax({
+                        type: "Post",
+                        url: "getsmsById/" + company_id,
+                        success: function (data) {
+
+                            $.each(data.sms, function (key, value) {
+                                $('#sms-list').append('<option value=' + value.id + '>' + value.name_sms + '</option>');
+                                $('#email-list').children('option:not(:first)').remove();
+                            });
+                        }
+                    });
+                }
+
+            });
+
+            $('#emailradio').change(function () {
+                if ($(this).is(":checked"))
+                {
+                    $.ajax({
+                        type: "Post",
+                        url: "getemailById/" + company_id,
+                        success: function (data) {
+
+                            $.each(data.email, function (key, value) {
+                                $('#email-list').append('<option value=' + value.id + '>' + value.name_email + '</option>');
+                                $('#sms-list').children('option:not(:first)').remove();
+                            });
+                        }
+                    });
+                }
+
+            });
+
+
+
+
+        });
+    </script>
+@stop

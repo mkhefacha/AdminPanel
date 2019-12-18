@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <div class="content">
-        @can('sms_create')
+        @can('email_create')
             <div style="margin-bottom: 10px;" class="row">
                 <div class="col-lg-12">
                     <a class="btn btn-success" href="{{ route("admin.email-companie.create") }}">

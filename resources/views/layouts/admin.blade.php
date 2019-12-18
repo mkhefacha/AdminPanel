@@ -87,7 +87,9 @@
                     </div>
                 </div>
             @endif
-            @yield('content')
+
+
+                @yield('content')
         </div>
         <footer class="main-footer text-center">
 
@@ -97,6 +99,7 @@
             {{ csrf_field() }}
         </form>
     </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -210,6 +213,7 @@
 
     </script>
     @yield('scripts')
+
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Event;
 use App\ListeCompany;
 use App\Role;
 use App\User;
@@ -8,6 +9,7 @@ use Illuminate\Http\Request;
 use App\ContactCompany;
 use App\ContactContact;
 use Auth;
+use App\SmsCompany;
 class TestController extends Controller
 {
 
@@ -18,9 +20,15 @@ class TestController extends Controller
 
         {
 
+      $event=Event::all();
+
+            return response()->json($event , 200);
+
+
+
            // $user= User::pluck('name');
           //return $user;
-            return Role::pluck('title', 'id');
+          //  return Role::pluck('title', 'id');
             //  return $user->forget('marwen')->all();
 
 

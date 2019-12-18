@@ -46,4 +46,16 @@ class Event extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function smscompanie()
+    {
+        return $this->belongsTo(SmsCompany::class);
+    }
+
+    public function emailcompanie()
+    {
+        return $this->belongs(EmailCompany::class);
+    }
+
+
 }

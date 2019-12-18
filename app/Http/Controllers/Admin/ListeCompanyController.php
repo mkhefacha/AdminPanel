@@ -42,7 +42,7 @@ class ListeCompanyController extends Controller
         $request->persist();
 
 
-        return redirect()->route('admin.companie-liste.index')->with('status', 'Profile updated!');;
+        return redirect()->route('admin.companie-liste.index')->with('success', 'liste etait bien ajouté');;
     }
 
     public function show(ListeCompany $companie_liste)

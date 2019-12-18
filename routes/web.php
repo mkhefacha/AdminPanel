@@ -51,14 +51,18 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     //sms_companies
     Route::delete('sms-company/destroy', 'SmsCompanyController@massDestroy')->name('sms-company.massDestroy');
+
     Route::resource('sms-company', 'SmsCompanyController');
 
     //email_companies
     Route::delete('email-companie/destroy', 'EmailCompanyController@massDestroy')->name('email-companie.massDestroy');
+
     Route::resource('email-companie','EmailCompanyController');
 
     //event
     Route::delete('event/destroy', 'EventController@massDestroy')->name('event.massDestroy');
+    Route::post('event/getsmsById/{id}','EventController@getsmsById');
+    Route::post('event/getemailById/{id}','EventController@getemailById');
     Route::resource('event','EventController');
 
 });

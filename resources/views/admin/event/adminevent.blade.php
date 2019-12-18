@@ -5,10 +5,6 @@
         </td>
 
         <td>
-            {{ $events->id ?? '' }}
-        </td>
-
-        <td>
             {{ $events->event_name ?? '' }}
         </td>
         <td>
@@ -20,9 +16,19 @@
         <td>
             {{ $events->date_lanch ?? '' }}
         </td>
+
+
+
         <td>
             {{ $events->creer ?? '' }}
         </td>
+
+
+        <td>
+            {{ $events->smscompanies->name_sms ?? '' }}
+        </td>
+
+
         <td>
             {{ucwords($events->created_at->formatlocalized('%d %b %G'))}}
         </td>

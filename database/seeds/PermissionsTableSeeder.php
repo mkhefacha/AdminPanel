@@ -232,6 +232,88 @@ class PermissionsTableSeeder extends Seeder
                 'title' =>  'liste_company_delete',
             ],
 
+            [
+                'id'    => '55',
+                'title' =>  'evenement_access',
+            ],
+
+
+
+            [
+                'id'    => '56',
+                'title' =>  'Sms_access',
+            ],
+
+
+            [
+                'id'    => '57',
+                'title' =>  'sms_create',
+            ],
+
+
+            [
+                'id'    => '58',
+                'title' =>  'sms_edit',
+            ],
+
+
+            [
+                'id'    => '59',
+                'title' =>  'sms_delete',
+            ],
+
+            [
+                'id'    => '60',
+                'title' =>  'Email_access',
+            ],
+
+            [
+                'id'    => '61',
+                'title' =>  'email_create',
+            ],
+
+            [
+                'id'    => '62',
+                'title' =>  'email_edit',
+            ],
+            [
+                'id'    => '63',
+                'title' =>  'email_delete',
+            ],
+
+            [
+                'id'    => '64',
+                'title' =>  'event_access',
+            ],
+
+            [
+                'id'    => '65',
+                'title' =>  'event_create',
+            ],
+            [
+                'id'    => '66',
+                'title' =>  'event_edit',
+            ],
+            [
+                'id'    => '67',
+                'title' =>  'event_delete',
+            ],
+
+
+            [
+            'id'    => '68',
+            'title' =>  'global_contact_delete',
+        ],
+
+            [
+                'id'    => '69',
+                'title' =>  'envoyer_email',
+            ],
+
+            [
+                'id'    => '70',
+                'title' =>  'envoyer_sms',
+            ],
         ];
 
         Permission::insert($permissions);

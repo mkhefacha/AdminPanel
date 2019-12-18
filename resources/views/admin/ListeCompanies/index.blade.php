@@ -3,11 +3,12 @@
     <div class="content">
         @can('liste_company_create')
             <div style="margin-bottom: 10px;" class="row">
-                <div class="col-lg-12">
 
+                <div class="col-lg-12">
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#yourModal">
                         ajouter liste
                     </button>
+                </div>
 
                         <div class="modal fade" id="yourModal" tabindex="-1" role="dialog"
                              aria-labelledby="myModalLabel">
@@ -88,7 +89,7 @@
     <script>
         $(function () {
             let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-                    @can('global_contact_delete')
+                    @can('liste_contact_delete')
             let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
             let deleteButton = {
                 text: deleteButtonTrans,

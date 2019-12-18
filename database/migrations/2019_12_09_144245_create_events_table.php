@@ -20,7 +20,7 @@ class CreateEventsTable extends Migration
 
             $table->string('date_lanch')->nullable();
 
-            $table->string('status')->nullable();
+            $table->string('status')->default(0);
 
 
             $table->unsignedInteger('user_id')->nullable();

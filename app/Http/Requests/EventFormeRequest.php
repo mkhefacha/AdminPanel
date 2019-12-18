@@ -30,8 +30,10 @@ class EventFormeRequest extends FormRequest
         Event::create([
             'event_name'=>request('event_name'),
             'date_lanch'=>request('date_lanch'),
-            'status'=>request('status'),
+           // 'status'=>request('status'),
             'company_id' => request('company_id'),
+            'event_type'=>request('sms-list'),
+             'event_type'=>request('email-list'),
             'liste_id' => request('liste_id'),
             'user_id' =>auth()->id(),
             'creer'=>auth()->user()->name

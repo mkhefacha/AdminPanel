@@ -26,9 +26,6 @@
                                     <th width="10">
 
                                     </th>
-                                    <th>
-                                        ID
-                                    </th>
 
                                     <th>
                                         event_name
@@ -44,6 +41,9 @@
                                     </th>
                                     <th>
                                         Réaliser par
+                                    </th>
+                                    <th>
+                                        event type
                                     </th>
                                     <th>
                                         date creation

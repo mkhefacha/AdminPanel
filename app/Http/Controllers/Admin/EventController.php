@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\ContactCompany;
+use App\EmailCompany;
 use App\Http\Requests\EventFormeRequest;
 use App\Http\Requests\MasseDestroyEventRequest;
 use App\ListeCompany;
 use App\Event;
+use App\SmsCompany;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,21 +22,21 @@ class EventController extends Controller
         abort_if(Gate::denies('event_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $event = Event::all();
-        return view('admin.event.index',compact('event'));//
+        return view('admin.event.index', compact('event'));//
     }
 
     public function create()
     {
         abort_if(Gate::denies('event_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $companies = ContactCompany::all();
-        $listes=ListeCompany::all();
-        return view('admin.event.create', compact('companies','listes'));
+        $listes = ListeCompany::all();
+        return view('admin.event.create', compact('companies', 'listes'));
     }
 
     public function store(EventFormeRequest $request)
     {
-           $request->persist();
-           return redirect()->route('admin.event.index');
+        $request->persist();
+        return redirect()->route('admin.event.index');
     }
 
 
@@ -50,17 +53,17 @@ class EventController extends Controller
         abort_if(Gate::denies('event_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $this->authorize('update', $event);
         $companies = ContactCompany::all();
-        $listes=ListeCompany::all();
+        $listes = ListeCompany::all();
 
-        return view('admin.event.edit',compact('companies','listes','event'));
+        return view('admin.event.edit', compact('companies', 'listes', 'event'));
     }
 
 
     public function update(EventFormeRequest $request, Event $event)
     {
-         $event->update($request->all());
+        $event->update($request->all());
 
-         return redirect()->route('admin.event.index');
+        return redirect()->route('admin.event.index');
     }
 
 
@@ -80,4 +83,18 @@ class EventController extends Controller
 
         return response(null, Response::HTTP_NO_CONTENT);
     }
+
+    public function getsmsById($id)
+    {
+
+            $sms = SmsCompany::where('company_id', $id)->get();
+        return response()->json(array('sms' => $sms), 200);
+    }
+    public function getemailById($id)
+    {
+
+        $email = EmailCompany::where('company_id', $id)->get();
+        return response()->json(array('email' => $email), 200);
+    }
+
 }

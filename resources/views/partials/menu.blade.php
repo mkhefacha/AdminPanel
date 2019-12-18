@@ -114,7 +114,7 @@
                 </li>
             @endcan
 
-            @can('event_access')
+            @can('evenement_access')
                 <li class="treeview">
                     <a href="#">
                         <i class="far fa-calendar-alt"></i>
