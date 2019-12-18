@@ -110,7 +110,7 @@
                             <div class="form-row">
 
                                 <div class="form-group col-md-4">
-                                    <input type="radio" id="smsradio" name="radiocheck">
+                                    <input type="radio" id="smsradio" name="radiocheck" value="sms">
                                     <label for="inputState">Sms</label>
                                     <select name="sms-list" id="sms-list" class="form-control">
                                         <option label="choisir votre sms..." disabled></option>
@@ -119,7 +119,7 @@
 
 
                                 <div class="form-group col-md-4">
-                                    <input type="radio" id="emailradio" name="radiocheck">
+                                    <input type="radio" id="emailradio" name="radiocheck" value="email">
                                     <label for="inputState">Email</label>
                                     <select name="email-list" id="email-list" class="form-control">
                                         <option label="choisir votre email..." disabled></option>

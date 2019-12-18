@@ -6,6 +6,7 @@ use App\Event;
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Gate;
+
 class EventFormeRequest extends FormRequest
 {
 
@@ -18,25 +19,27 @@ class EventFormeRequest extends FormRequest
 
     public function rules()
     {
-        return [
-
-
-        ];
+        return
+            [
+                'event_name' => 'required'
+            ];
     }
 
 
     public function persist()
     {
         Event::create([
-            'event_name'=>request('event_name'),
-            'date_lanch'=>request('date_lanch'),
-           // 'status'=>request('status'),
+            'event_name' => request('event_name'),
+            'date_lanch' => request('date_lanch'),
+            // 'status'=>request('status'),
             'company_id' => request('company_id'),
-            'event_type'=>request('sms-list'),
-             'event_type'=>request('email-list'),
+            'event_type' => request('radiocheck'),
+            //'event_type' => request('email-list'),
+            'sms_id'=>request('sms-list'),
+            'email_id'=> request('email-list'),
             'liste_id' => request('liste_id'),
-            'user_id' =>auth()->id(),
-            'creer'=>auth()->user()->name
+            'user_id' => auth()->id(),
+            'creer' => auth()->user()->name
 
         ]);
     }

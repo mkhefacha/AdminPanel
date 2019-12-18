@@ -49,12 +49,12 @@ class Event extends Model
 
     public function smscompanie()
     {
-        return $this->belongsTo(SmsCompany::class);
+        return $this->belongsTo(SmsCompany::class, 'sms_id');
     }
 
     public function emailcompanie()
     {
-        return $this->belongs(EmailCompany::class);
+        return $this->belongsTo(EmailCompany::class,   'email_id' );
     }
 
 

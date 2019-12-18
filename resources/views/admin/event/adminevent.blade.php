@@ -25,7 +25,7 @@
 
 
         <td>
-            {{ $events->smscompanies->name_sms ?? '' }}
+            {{ $events->smscompanie->name_sms ?? $events->emailcompanie->name_email ??'' }}
         </td>
 
 
