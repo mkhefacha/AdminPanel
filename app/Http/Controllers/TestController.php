@@ -20,9 +20,9 @@ class TestController extends Controller
 
         {
 
-      $event=Event::all();
+            $event=Event::all();
 
-            return response()->json($event , 200);
+
 
 
 

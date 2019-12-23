@@ -64,6 +64,7 @@
             </nav>
         </header>
 
+
         @include('partials.menu')
 
         <div class="content-wrapper" style="min-height: 960px;">

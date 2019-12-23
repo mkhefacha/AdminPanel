@@ -21,7 +21,7 @@ class CompanyListeRequest extends FormRequest
     {
         return [
             'liste_name' => 'required',
-            'company_id' => 'required', 'integer',
+           // 'company_id' => 'required', 'integer',
         ];
     }
 
