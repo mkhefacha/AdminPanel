@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ContactCompany;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $companies_count=ContactCompany::count();
+
+        return view('home',compact('companies_count'));
     }
 }
