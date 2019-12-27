@@ -158,18 +158,19 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
+
             $('#company_id').click(function () {
                 company_id = $(this).val();
             })
 
             $('#smsradio').change(function () {
-                if ($(this).is(":checked"))
-                {
+                if ($(this).is(":checked")) {
                     $.ajax({
+
                         type: "Post",
                         url: "getsmsById/" + company_id,
                         success: function (data) {
-
                             $.each(data.sms, function (key, value) {
                                 $('#sms-list').append('<option value=' + value.id + '>' + value.name_sms + '</option>');
                                 $('#email-list').children('option:not(:first)').remove();
@@ -181,8 +182,7 @@
             });
 
             $('#emailradio').change(function () {
-                if ($(this).is(":checked"))
-                {
+                if ($(this).is(":checked")) {
                     $.ajax({
                         type: "Post",
                         url: "getemailById/" + company_id,
@@ -199,8 +199,10 @@
             });
 
 
-
-
         });
     </script>
+
+
+
+
 @stop

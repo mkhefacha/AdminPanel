@@ -130,10 +130,6 @@
                                     {{ trans('cruds.contactContact.fields.contact_email_helper') }}
                                 </p>
                             </div>
-                            <div class="form-group">
-                                <span class="label label-info">Import CSV file contact si tu veux</span>
-                                <a href="#" data-toggle="modal" data-target="#yourModal"><i class="fa fa-download"></i></a>
-                            </div>
 
 
                             <div class="modal fade" id="yourModal" tabindex="-1" role="dialog"
@@ -235,7 +231,6 @@
                                         </div>
 
 
-
                                     </div>
                                 </div>
                             </div>
@@ -244,6 +239,12 @@
                             <div>
                                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
                             </div>
+<br>
+                            <div class="form-group">
+                                <span class="label label-info">Import CSV file contact </span>&nbsp;
+                                <a href="#" data-toggle="modal" data-target="#yourModal"><i class="fa fa-download"></i></a>
+                            </div>
+
                         </form>
 
                     </div>
@@ -253,4 +254,14 @@
         </div>
     </div>
 @endsection
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+<script>
+    $(document).ready(function ($) {
+        $("#contact_phone_1").mask("99 999 999");
+        $("#contact_phone_2").mask("99 999 999");
+    })
+</script>
 <!--!-->

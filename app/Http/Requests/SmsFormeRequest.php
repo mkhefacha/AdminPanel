@@ -21,7 +21,7 @@ class SmsFormeRequest extends FormRequest
     {
         return [
             'name_sms'=>'required',
-            'message_sms'=>'required'
+            'message_sms'=>'required|string|max:100'
         ];
     }
                 public function  persist()

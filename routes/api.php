@@ -7,7 +7,5 @@ Route::group(['as' => 'api.', 'namespace' => 'Api\Admin' ,'middleware' => ['auth
 
     Route::Resource('users','UserController');
 
-
-
-
 });
+
